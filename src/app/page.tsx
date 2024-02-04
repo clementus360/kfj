@@ -1,6 +1,3 @@
-import Header from "@/components/Header";
-import Image from "next/image";
-
 function Hero() {
   return (
     <section className="top-0 flex items-center justify-center w-full pt-24 h-[60vh] bg-red-300">
@@ -39,7 +36,8 @@ function About() {
 
 
 
-export default function Home() {
+export default async function Home() {
+
   return (
     <main className="absolute top-0">
       <Hero />
