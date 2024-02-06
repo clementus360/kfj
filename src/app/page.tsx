@@ -1,25 +1,25 @@
+import { Footer } from "@/components/Footer";
+
 function Hero() {
   return (
-    <section className="top-0 flex items-center justify-center w-full pt-24 h-[60vh] bg-red-300">
-        <div className="grid grid-cols-2 gap-8 px-8 w-5/6 ">
-            <h1 className="font-bold text-6xl">ALL THE BEST DEALS IN ONE PLACE</h1>
+    <section className={`top-0 flex items-center justify-center w-full pt-24 h-[60vh] bg-gradient-to-r from-black to-transparent bg-cover`} style={{ backgroundImage: 'url("https://firebasestorage.googleapis.com/v0/b/broker-14bcb.appspot.com/o/reagan-m-TvpAVeqOZSo-unsplash.jpg?alt=media&token=b825c098-2020-4533-ac21-f0da928b959d")' }}>
+      <div className="grid grid-cols-[1fr_2fr] gap-8 items-center px-8 w-5/6 ">
+        <h1 className="text-6xl font-black">THE BEST DEALS IN ONE PLACE</h1>
 
-            <img src="/" alt="image" className=" bg-black" />
-        </div>
+        {/* <img src="https://firebasestorage.googleapis.com/v0/b/broker-14bcb.appspot.com/o/modern-residential-district-with-green-roof-balcony-generated-by-ai.jpg?alt=media&token=72e53150-481e-42a5-b382-c8972845fb57" alt="image" className=" bg-black" /> */}
+      </div>
     </section>
   )
 }
 
 function About() {
   return (
-    <section className="grid grid-cols-2 gap-16 items-center justify-center px-32 py-16 h-[30vw]">
+    <section className="grid grid-cols-[2fr_3fr] gap-16 items-center justify-center px-32 py-16 h-max">
 
-      <div className="">
-        <img src="/" alt="image" className="w-full bg-black h-full" />
-      </div>
+        <img src="https://firebasestorage.googleapis.com/v0/b/broker-14bcb.appspot.com/o/reagan-m-TvpAVeqOZSo-unsplash.jpg?alt=media&token=b825c098-2020-4533-ac21-f0da928b959d" alt="image" className="w-full bg-black h-full rounded-lg" />
 
       <div className="flex flex-col gap-4">
-              
+
         <div className="flex flex-col">
           <h3 className="text-sm text-slate-500 font-light">About Us</h3>
           <h2 className="text-2xl text-black font-black">OUR COMPANY</h2>
@@ -34,6 +34,51 @@ function About() {
   )
 }
 
+function Services() {
+  return (
+    <section className="items-center justify-center px-32 py-16 h-max">
+
+      <div className="flex items-center gap-4 w-full">
+
+        <div className="flex flex-col">
+          <h3 className="text-sm text-slate-500 font-light">Our Services</h3>
+          <h2 className="text-2xl text-black font-black">FIND A DEAL THAT SUITS YOUR NEEDS</h2>
+        </div>
+
+        <div className="flex gap-8 w-full justify-between h-max">
+
+          <a href="/properties" className="w-full h-full" >
+          <div className="flex flex-col items-center justify-center gap-8 py-16 bg-slate-200 hover:bg-slate-300 rounded-lg w-full">
+            <img src="/icons/house.svg" alt="house" className="w-24" />
+            <h2 className="text-xl font-bold">Property deals</h2>
+          </div>
+          </a>
+
+          <a href="/cars" className="w-full h-full">
+          <div className="flex flex-col items-center justify-center gap-8 py-16 bg-slate-200 hover:bg-slate-300 rounded-lg w-full">
+            <img src="/icons/car.svg" alt="car" className="w-24" />
+            <h2 className="text-xl font-bold">Car deals</h2>
+          </div>
+          </a>
+
+        </div>
+
+
+      </div>
+
+    </section>
+  )
+}
+
+function Contact() {
+  return (
+    <section className="flex flex-col justify-center items-center w-max m-auto">
+      <h1 className="text-6xl font-gilroy font-bold">REACH OUT TO US</h1>
+      <button className="bg-black px-6 py-4 text-white font-bold w-full rounded-lg">EMAIL US</button>
+    </section>
+  )
+}
+
 
 
 export default async function Home() {
@@ -42,6 +87,9 @@ export default async function Home() {
     <main className="absolute top-0">
       <Hero />
       <About />
+      <Services />
+      <Contact />
+      <Footer />
     </main>
   );
 }

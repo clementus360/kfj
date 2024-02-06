@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
-import Properties from "@/components/Header";
 import Header from "@/components/Header";
-
-const inter = Inter({ subsets: ["latin"] });
+import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "KFJ",
@@ -18,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>  
+      <body className="font-gilroy">  
         <Header />
         {children}
       </body>

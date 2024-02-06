@@ -1,0 +1,36 @@
+import Image from "next/image";
+// import Logo from "../../public/logo.svg"
+
+import facebook from "../../public/icons/icons8-facebook.svg"
+import instagram from "../../public/icons/icons8-instagram.svg"
+import linkedin from "../../public/icons/icons8-linkedin.svg"
+import twitter from "../../public/icons/icons8-twitter.svg"
+import youtube from "../../public/icons/icons8-youtube.svg"
+import flickr from "../../public/icons/icons8-flickr.svg"
+
+export function Footer() {
+	return(
+	  <footer className='relative z-50 flex flex-col gap-4 w-full justify-between py-8 px-8 sm:px-12 text-black bg-primary'>
+		<div className='flex flex-col gap-8 sm:gap-0 sm:flex-row justify-between items-center w-full py-4 border-accent border-b-2'>
+		  {/* <Image className="w-60" src={Logo} width={"100%"} /> */}
+		  <ul className="flex gap-4">
+			{/* <a href="" target="_blank"><li className="w-10 h-10 p-2 rounded-full border-[0.1rem] border-black"><Image src={facebook} width={'50%'}></Image></li></a>
+			<a href="" target="_blank"><li className="w-10 h-10 p-2 rounded-full border-[0.1rem] border-black"><Image src={twitter} width={'50%'}></Image></li></a>		 */}
+			<a href="https://www.youtube.com/@FunkymonkeyArcade" target="_blank"><li className="w-10 h-10 p-2 rounded-full border-[0.1rem] border-black"><Image src={youtube} width={'50%'}></Image></li></a>
+			{/* <a href="" target="_blank"><li className="w-10 h-10 p-2 rounded-full border-[0.1rem] border-black"><Image src={linkedin} width={'50%'}></Image></li></a>			 */}
+			<a href="https://instagram.com/funkymonkeyarcade?utm_source=qr&igshid=MzNlNGNkZWQ4Mg%3D%3D" target="_blank"><li className="w-10 h-10 p-2 rounded-full border-[0.1rem] border-black"><Image src={instagram} width={'50%'}></Image></li></a>
+			<a href="https://www.flickr.com/photos/1_st_egamers/" target="_blank"><li className="w-10 h-10 p-2 rounded-full border-[0.1rem] border-black"><Image src={flickr} width={'50%'}></Image></li></a>
+		  </ul>
+		</div>
+		<div>
+		  <ul className='flex gap-8 font-LogikBold text-2xl text-center sm:text-left'>
+			<li>Privacy Policy</li>
+			<li>Terms and conditions</li>
+		  </ul>
+		</div>
+		<div className='flex justify-center w-full text-center sm:text-left'>
+		  <p className='text-sm font-LogikWide'>© All rights reserved – Broker</p>
+		</div>
+	  </footer>
+	)
+  }

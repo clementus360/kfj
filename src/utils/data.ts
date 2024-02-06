@@ -1,3 +1,5 @@
+"use server"
+
 import { house, houseData } from "./types";
 
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";

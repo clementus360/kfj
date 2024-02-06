@@ -8,6 +8,17 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        gilroy: ['Gilroy', 'sans-serif'],
+      },
+      fontWeight: {
+        black: '900',
+        bold: '700',
+        extrabold: '800',
+        light: '300',
+        normal: '400',
+        thin: '100',
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
