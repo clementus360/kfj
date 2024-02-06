@@ -1,10 +1,12 @@
 import House from "./House";
 
-import { fetchHouses } from "@/utils/data";
+// import { fetchHouses } from "@/utils/data";
 import { house } from "@/utils/types";
 
 import Search from "./Search";
 import { Suspense } from "react";
+import { fetchHouses } from "@/utils/data";
+import { DocumentData } from "firebase/firestore";
 
 export default async function Properties({
     searchParams,
@@ -36,9 +38,7 @@ export default async function Properties({
             <div className="px-8 lg:px-32 py-16 w-full">
                 <div className="flex flex-wrap justify-start gap-8 w-full">
                     <Suspense fallback={<div>Loading...</div>}>
-                        {houseList?.map((house, key) => (
-                            <House key={key} {...house} />
-                        ))}
+                        {houseList?.map((house: house, key) => <House key={key} {...house} />)}
                     </Suspense>
                 </div>
             </div>

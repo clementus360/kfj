@@ -13,12 +13,11 @@ export default async function HouseOverlay({params}:{params: Params}) {
 
     const house: house | null = await fetchSingleHouse(params.id)
 
-    console.log(house)
 
     return (
       <section className="absolute top-0 flex flex-col gap-8  bg-opacity-80 w-full ">
        
-        <img src={house?.cover_image} alt="house" className="bg-black w-full h-[30vw]"/>
+        <img src={house?.cover} alt="house" className="bg-black w-full h-[30vw]"/>
 
         <div className="flex flex-col gap-2 items-center">
           <p>{house?.description}</p>

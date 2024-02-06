@@ -1,13 +1,14 @@
 import { house } from "@/utils/types";
 
 
-export default function House({id, location, price, cover_image, date_added}: house) {
+export default function House({houseId, location, price, cover, date_added}: house) {
+
 
 
   return (
     <div className="flex flex-col gap-4 w-full lg:w-max lg:min-w-[360px] bg-slate-200 p-4 rounded-lg shadow-lg">
 
-        <img src={cover_image} alt="house name" className="bg-black w-full rounded-lg aspect-video" />
+        <img src={cover} alt="house name" className="bg-black w-full rounded-lg aspect-video" />
 
         <div>
             <div className="flex gap-2 items-center">
@@ -22,7 +23,7 @@ export default function House({id, location, price, cover_image, date_added}: ho
 
         </div>
 
-        <a href={`/properties/${id}`}><button className="bg-black hover:bg-slate-900 text-white rounded-full w-full py-2 font-bold">More Info</button></a>
+        <a href={`/properties/${houseId}`}><button className="bg-black hover:bg-slate-900 text-white rounded-full w-full py-2 font-bold">More Info</button></a>
 
         <div>
           <p className="text-xs text-slate-400">{date_added?.toLocaleString()}</p>
