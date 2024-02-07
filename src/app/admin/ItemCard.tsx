@@ -1,6 +1,6 @@
-import { house } from "@/utils/types";
+import { car, house } from "@/utils/types";
 
-export function ItemCard(house:house) {
+export function ItemCard(house:house | car) {
     return (
         <div className="flex gap-4 w-full items-center justify-between shadow-lg rounded-lg pr-8 overflow-hidden">
             <img src={house.cover} alt="test" className="w-60 bg-black" />
