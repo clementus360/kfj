@@ -13,7 +13,7 @@ export default async function Page() {
             <AddHouse />
 
             <div className="flex justify-between gap-4 flex-wrap">
-                {houseList.map((house,key) => <ItemCard {...house} /> )}
+                {houseList.map((house,key) => <ItemCard key={key} {...house} /> )}
             </div>
 
         </section>
