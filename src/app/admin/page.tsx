@@ -1,10 +1,3 @@
-"use client"
-
-import { useEffect, useState } from "react"
-
-import { HouseAdmin } from "./HouseAdmin"
-import { CarAdmin } from "./CarAdmin"
-
 export default function page() {
 
     return (
