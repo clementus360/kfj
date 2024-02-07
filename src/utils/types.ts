@@ -9,6 +9,17 @@ export interface house {
     phone: string;
 }
 
+export interface car {
+    carId: string;
+    location: string;
+    price: string;
+    cover: string;
+    images: Array<string>;
+    description: string;
+    date_added: string;
+    phone: string;
+}
+
 export interface houseData {
     location: string;
     price: string;

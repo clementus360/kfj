@@ -1,6 +1,6 @@
 "use server"
 
-import { house, houseData } from "./types";
+import { car, house, houseData } from "./types";
 
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { getFirestore,setDoc, query, where, collection, getDocs, doc, QueryDocumentSnapshot, DocumentData } from "firebase/firestore";
@@ -91,3 +91,88 @@ export async function fetchSingleHouse(id: string): Promise<house | null> {
 
   return house;
 }
+
+
+export async function addCar({location, price, cover_image, images, description, date_added, phone}: houseData) {
+
+  const carId = uniqid()
+
+	const storage = getStorage()
+	const storageRef = ref(storage, `${carId}.png`)
+
+	const snapshot = await uploadBytes(storageRef, cover_image);
+	const coverLink = await getDownloadURL(snapshot.ref);
+
+  let imageList = []
+
+  for (let i=0; i<images.length; i++) {
+    const storage = getStorage()
+	  const storageRef = ref(storage, `${carId}-${i}.png`)
+
+    const snapshot = await uploadBytes(storageRef, images[i]);
+	  const imageLink = await getDownloadURL(snapshot.ref);
+
+    imageList.push(imageLink)
+  }
+
+	const db = getFirestore(app);
+
+	await setDoc(doc(db, 'cars', carId), {
+    carId,
+		cover: coverLink,
+    price,
+    location,
+    description,
+    date_added,
+    phone,
+		images: imageList,
+	})
+}
+
+export async function fetchCar(): Promise<car[]> {
+  const db = getFirestore(app);
+  const q = query(collection(db, "cars"));
+  const querySnapshot = await getDocs(q);
+
+  const cars: car[] = querySnapshot.docs.map((doc: QueryDocumentSnapshot<DocumentData>) => {
+      const data = doc.data();
+      return {
+          carId: doc.id,
+          location: data.location,
+          price: formatCurrency(data.price),
+          cover: data.cover,
+          images: data.images,
+          description: data.description,
+          date_added: formatTimestamp(data.date_added),
+          phone: data.phone,
+      };
+  });
+
+  return cars;
+}
+
+export async function fetchSingleCar(id: string): Promise<car | null> {
+  const db = getFirestore(app);
+  const q = query(collection(db, "cars"), where("carId", "==", id));
+  const querySnapshot = await getDocs(q);
+
+  if (querySnapshot.docs.length === 0) {
+      return null; // No matching document found
+  }
+
+  const carData: DocumentData = querySnapshot.docs[0].data();
+
+  const car: car = {
+      carId: querySnapshot.docs[0].id,
+      location: carData.location,
+      price: formatCurrency(carData.price),
+      cover: carData.cover,
+      images: carData.images,
+      description: carData.description,
+      date_added: formatTimestamp(carData.date_added),
+      phone: carData.phone,
+  };
+
+  return car;
+}
+
