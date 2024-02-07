@@ -3,8 +3,8 @@ import { car } from "@/utils/types";
 
 import Search from "./Search";
 import { Suspense } from "react";
-import { fetchCar } from "@/utils/data";
-import Car from "./car";
+import { fetchCars } from "@/utils/data";
+import Car from "./Car";
 
 export default async function Properties({
     searchParams,
@@ -15,7 +15,7 @@ export default async function Properties({
 }) {
 
     const query = searchParams?.query || '';
-    let carList: Array<car> = await fetchCar()
+    let carList: Array<car> = await fetchCars()
 
     if (query) {
         carList = carList.filter((car) =>

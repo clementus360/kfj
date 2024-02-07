@@ -3,10 +3,8 @@ import { house } from "@/utils/types";
 
 export default function House({houseId, location, price, cover, date_added}: house) {
 
-
-
   return (
-    <div className="flex flex-col gap-4 w-full lg:w-max lg:min-w-[360px] bg-slate-200 p-4 rounded-lg shadow-lg">
+    <div className="flex flex-col gap-4 w-full lg:w-min lg:min-w-[360px] bg-slate-200 p-4 rounded-lg shadow-lg">
 
         <img src={cover} alt="house name" className="bg-black w-full rounded-lg aspect-video" />
 

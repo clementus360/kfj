@@ -1,5 +1,3 @@
-"use server"
-
 import { car, house, houseData } from "./types";
 
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -129,7 +127,7 @@ export async function addCar({location, price, cover_image, images, description,
 	})
 }
 
-export async function fetchCar(): Promise<car[]> {
+export async function fetchCars(): Promise<car[]> {
   const db = getFirestore(app);
   const q = query(collection(db, "cars"));
   const querySnapshot = await getDocs(q);

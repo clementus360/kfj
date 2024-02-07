@@ -57,6 +57,8 @@ export function HouseForm({ toggleForm }: any) {
                 phone: phone,
             };
 
+            console.log(house)
+
             try {
                 addHouse(house).then(() => {
                     setCover(null)
