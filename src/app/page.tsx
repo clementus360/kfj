@@ -2,12 +2,16 @@ import { Footer } from "@/components/Footer";
 
 function Hero() {
   return (
-    <section className={`top-0 flex items-center justify-center w-full pt-24 h-[60vh] bg-gradient-to-r from-black to-transparent bg-cover`} style={{ backgroundImage: 'url("https://firebasestorage.googleapis.com/v0/b/broker-14bcb.appspot.com/o/reagan-m-TvpAVeqOZSo-unsplash.jpg?alt=media&token=b825c098-2020-4533-ac21-f0da928b959d")' }}>
-      <div className="grid grid-cols-[1fr_2fr] gap-8 items-center px-8 w-5/6 ">
+    <section className={`relative z-100 top-0 flex items-center justify-center w-full pt-8 h-[60vh] bg-gradient-to-r from-black to-transparent bg-cover `} style={{ backgroundImage: 'url("https://firebasestorage.googleapis.com/v0/b/broker-14bcb.appspot.com/o/view-istanbul-cloudy-weather-multiple-low-high-buildings-fog-sunlight-breaking-through-clouds-turkey.png?alt=media&token=4617e990-72ef-42de-9441-844a90630d5a")' }}>
+
+      <div className="relative z-20 grid grid-cols-[1fr_2fr] gap-8 items-center px-8 w-5/6 ">
         <h1 className="text-6xl font-black">THE BEST DEALS IN ONE PLACE</h1>
 
-        {/* <img src="https://firebasestorage.googleapis.com/v0/b/broker-14bcb.appspot.com/o/modern-residential-district-with-green-roof-balcony-generated-by-ai.jpg?alt=media&token=72e53150-481e-42a5-b382-c8972845fb57" alt="image" className=" bg-black" /> */}
+        <img src="https://firebasestorage.googleapis.com/v0/b/broker-14bcb.appspot.com/o/3d-view-house-model.png?alt=media&token=633ed869-5c42-438f-a755-4a035a76fe7b" alt="image" className="" />
       </div>
+
+      <div className="absolute z-0 top-0 left-0 bg-white bg-opacity-60  h-full w-full"></div>
+
     </section>
   )
 }
@@ -16,7 +20,7 @@ function About() {
   return (
     <section className="grid grid-cols-[2fr_3fr] gap-16 items-center justify-center px-32 py-16 h-max">
 
-        <img src="https://firebasestorage.googleapis.com/v0/b/broker-14bcb.appspot.com/o/reagan-m-TvpAVeqOZSo-unsplash.jpg?alt=media&token=b825c098-2020-4533-ac21-f0da928b959d" alt="image" className="w-full bg-black h-full rounded-lg" />
+        <img src="https://firebasestorage.googleapis.com/v0/b/broker-14bcb.appspot.com/o/african-business-male-people-shaking-hands.png?alt=media&token=2486d508-0cf4-4a31-9089-b85a8ea3e340" alt="image" className="w-full bg-black h-full rounded-lg" />
 
       <div className="flex flex-col gap-4">
 

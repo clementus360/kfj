@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react";
-import { HouseForm } from "../HouseForm";
+import { HouseForm } from "./CarForm";
 
 export default function AddCar() {
 
