@@ -4,7 +4,7 @@ import { car } from "@/utils/types";
 import Search from "./Search";
 import { Suspense } from "react";
 import { fetchCars } from "@/utils/data";
-import Car from "./Car";
+import Car from "./car";
 
 export default async function Properties({
     searchParams,
