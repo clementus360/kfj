@@ -1,21 +1,10 @@
-"use client"
-
-import { useState } from "react";
-import { HouseForm } from "./HouseForm";
-
 export default function AddHouse() {
 
-    const [isForm, setIsForm] = useState(false)
-
-    function toggleForm() {
-        setIsForm(!isForm)
-    }
 
     return (
         <div className="flex w-full justify-between items-center border-b-[1px] border-black py-4 px-4">
-            {isForm && <HouseForm toggleForm={toggleForm} />}
             <h2 className="font-bold text-xl">Houses List</h2>
-            <button onClick={toggleForm} className="bg-blue-800 text-white px-4 py-2 rounded-lg">Add House</button>
+            <a href="/admin/addhouse"><button className="bg-blue-800 text-white px-4 py-2 rounded-md">Add House</button></a>
         </div>
     );
 }

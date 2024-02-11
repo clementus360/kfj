@@ -14,7 +14,7 @@ export default async function CarOverlay({params}:{params: Params}) {
     const car: car | null = await fetchSingleCar(params.id)
 
     return (
-      <section className="absolute top-0 flex flex-col gap-8  bg-opacity-80 w-full ">
+      <section className="flex flex-col gap-8  bg-opacity-80 w-full ">
        
         <img src={car?.cover} alt="car" className="bg-black w-full h-[30vw]"/>
 

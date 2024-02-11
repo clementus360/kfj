@@ -27,3 +27,44 @@ export function formatTimestamp(timestamp: number): string {
 
   return `${day}/${month}/${year} - ${hours}:${minutes}`;
 }
+
+export function addCommasToPrice(price: string) {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+
+export const locations = {
+    Kigali: "Kigali",
+    Butare: "Butare",
+    Gisenyi: "Gisenyi",
+    Rwamagana: "Rwamagana",
+    Musanze: "Musanze",
+    Huye: "Huye",
+    Rubavu: "Rubavu",
+    Muhanga: "Muhanga",
+    Karongi: "Karongi",
+    Nyagatare: "Nyagatare",
+    Rusizi: "Rusizi",
+    Ngoma: "Ngoma",
+    Nyamata: "Nyamata",
+    Ruhango: "Ruhango",
+    Nyanza: "Nyanza",
+    Gicumbi: "Gicumbi",
+    Kibuye: "Kibuye",
+    Bugesera: "Bugesera",
+    Kirehe: "Kirehe",
+    Kayonza: "Kayonza",
+    Ngororero: "Ngororero",
+    Kamonyi: "Kamonyi",
+    Burera: "Burera",
+    Rulindo: "Rulindo",
+    Nyarugenge: "Nyarugenge",
+    Nyaruguru: "Nyaruguru",
+    Nyamasheke: "Nyamasheke",
+    Nyabihu: "Nyabihu",
+    Gatsibo: "Gatsibo",
+    Gakenke: "Gakenke",
+    Gasabo: "Gasabo",
+    Nyamagabe: "Nyamagabe",
+    Rutsiro: "Rutsiro",
+  };

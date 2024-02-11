@@ -1,14 +1,14 @@
-import { car, house } from "@/utils/types";
+import { car, house, houseData } from "@/utils/types";
 
-export function ItemCard(house:house | car) {
+export function HouseCard(house: house) {
     return (
-        <div className="flex gap-4 w-full items-center justify-between shadow-lg rounded-lg pr-8 overflow-hidden">
+        <div className="flex flex-col lg:flex-row gap-4 w-full items-center justify-between shadow-lg rounded-md py-8 lg:py-0 lg:pr-8 overflow-hidden">
             <img src={house.cover} alt="test" className="w-60 bg-black" />
 
             <div className="flex flex-col gap-2">
                 <div className="flex gap-2 items-center">
                     <img src="/icons/location.svg" alt="location" className="w-6" />
-                    <p className="text-sm">{house.location}</p>
+                    <p className="text-sm">{house.address.area}</p>
                 </div>
 
                 <div className="flex gap-2 items-center">
@@ -23,7 +23,7 @@ export function ItemCard(house:house | car) {
 
             </div>
 
-            <button className="px-6 py-2 rounded-lg bg-red-600 text-white">Delete</button>
+            <button className="px-6 py-2 rounded-md bg-red-600 text-white">Delete</button>
         </div>
     );
 }

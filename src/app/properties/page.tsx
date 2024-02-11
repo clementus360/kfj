@@ -20,13 +20,13 @@ export default async function Properties({
 
     if (query) {
         houseList = houseList.filter((house) =>
-            house.location.toLowerCase().includes(query.toLowerCase())
+            house.address.area.toLowerCase().includes(query.toLowerCase())
         );
     }
 
     return (
-        <section className="absolute top-0 w-screen">
-            <div className={`relative flex items-end justify-center h-[80vh] lg:h-[50vh] bg-[url("https://firebasestorage.googleapis.com/v0/b/broker-14bcb.appspot.com/o/reagan-m-TvpAVeqOZSo-unsplash.jpg?alt=media&token=b825c098-2020-4533-ac21-f0da928b959d")] bg-cover`}>
+        <section className="w-screen">
+            <div className={`relative flex items-end justify-center h-[80vh] lg:h-[50vh] bg-[url("https://firebasestorage.googleapis.com/v0/b/broker-14bcb.appspot.com/o/24725.jpg?alt=media&token=e33fa891-8f03-452b-b0e7-80944da520cd")] bg-cover`}>
                 <div className="relative z-20 flex flex-col gap-8 px-8 py-8 lg:w-3/6 ">
                     <h1 className="font-extrabold text-6xl text-center text-white">FIND THE PERFECT DREAM HOUSE</h1>
 

@@ -28,11 +28,11 @@ export default function Search({ placeholder }: { placeholder: string }) {
                 defaultValue={searchParams.get('query')?.toString()}
                 type="text"
                 name="search"
-                className="px-4 py-2 w-full rounded-lg shadow-lg border-[0.5px] border-black"
+                className="px-4 py-2 w-full rounded-md shadow-lg border-[0.5px] border-black"
                 placeholder={placeholder}
                 id="house-search"
             />
-            <button className="text-black font-bold py-2 px-4 rounded-lg w-full lg:w-max bg-white hover:bg-slate-200">Search</button>
+            <button className="text-white font-bold py-2 px-4 rounded-md w-full lg:w-max bg-green-500 hover:bg-slate-200">Search</button>
         </div>
     )
 }

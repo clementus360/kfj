@@ -1,7 +1,7 @@
 "use client"
 
 import { addCar, addHouse } from "@/utils/data";
-import { houseData } from "@/utils/types";
+import { carData, houseData } from "@/utils/types";
 import { ChangeEvent, SetStateAction, useState } from "react";
 
 export function HouseForm({ toggleForm }: any) {
@@ -42,12 +42,14 @@ export function HouseForm({ toggleForm }: any) {
     };
 
     function uploadCar() {
+
+
         setDisabled(!disabled)
 
         if (cover && location && price && description && phone) {
 
 
-            const car: houseData = {
+            const car: carData = {
                 location: location,
                 price: price,
                 cover_image: cover,
@@ -56,6 +58,8 @@ export function HouseForm({ toggleForm }: any) {
                 date_added: Date.now(),
                 phone: phone,
             };
+
+            console.log(car)
 
             try {
                 addCar(car).then(() => {
@@ -83,7 +87,7 @@ export function HouseForm({ toggleForm }: any) {
 
     return (
         <div className="fixed z-50 grid place-items-center left-0 top-0 w-screen h-screen bg-black bg-opacity-85">
-            <form action={uploadCar} className="flex flex-col gap-8 w-4/12 bg-white px-8 py-8 rounded-lg">
+            <form action={uploadCar} className="flex flex-col gap-8 w-4/12 bg-white px-8 py-8 rounded-md">
                 <h1 className="text-2xl font-bold">Add Cae</h1>
                 <div>
                     <p>Add Cover</p>
@@ -98,19 +102,19 @@ export function HouseForm({ toggleForm }: any) {
                 <input onChange={handlePrice} value={price} type="text" name="price" placeholder="Enter price" className="h-8 px-2 border-b-2 focus:border-accent outline-none bg-transparent transition-all" />
                 <textarea onChange={handleDescription} value={description} name="description" placeholder="Enter description" className="h-16 px-2 border-b-2 focus:border-accent outline-none bg-transparent transition-all"></textarea>
                 <div className="flex w-full justify-between">
-                    <button disabled={disabled} onClick={toggleForm} className="bg-slate-600 disabled:bg-slate-400 text-white px-4 py-2 rounded-lg">Cancel</button>
-                    <button disabled={disabled} className="bg-blue-800 disabled:bg-slate-400 text-white px-4 py-2 rounded-lg">Add House</button>
+                    <button disabled={disabled} onClick={toggleForm} className="bg-slate-600 disabled:bg-slate-400 text-white px-4 py-2 rounded-md">Cancel</button>
+                    <button disabled={disabled} className="bg-blue-800 disabled:bg-slate-400 text-white px-4 py-2 rounded-md">Add House</button>
                 </div>
             </form>
 
             {success &&
-				<div className="fixed z-50 flex justify-center m-auto bottom-0 left-0 w-screen p-4 bg-black bg-opacity-80 rounded-lg">
+				<div className="fixed z-50 flex justify-center m-auto bottom-0 left-0 w-screen p-4 bg-black bg-opacity-80 rounded-md">
 					<h1 className="text-2xl text-green-600">Article uploaded successfully</h1>
 				</div>
 			}
 
 			{error &&
-				<div className="fixed z-50 flex justify-center m-auto bottom-0 left-0 w-screen p-4 bg-black bg-opacity-80 rounded-lg">
+				<div className="fixed z-50 flex justify-center m-auto bottom-0 left-0 w-screen p-4 bg-black bg-opacity-80 rounded-md">
 					<h1 className="text-2xl text-red-600">{error}</h1>
 				</div>
 			}

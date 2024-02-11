@@ -15,9 +15,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="font-gilroy">  
+      <body className="font-gilroy bg-slate-100">  
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
