@@ -4,7 +4,7 @@ import { car } from "@/utils/types";
 import Search from "./Search";
 import { Suspense } from "react";
 import { fetchCars } from "@/utils/data";
-import Car from "./Car";
+// import Car from "./Car";
 
 export default async function Properties({
     searchParams,
@@ -38,7 +38,7 @@ export default async function Properties({
             <div className="px-8 lg:px-32 py-16 w-full">
                 <div className="flex flex-wrap justify-start gap-8 w-full">
                     <Suspense fallback={<div>Loading...</div>}>
-                        {carList?.map((car: car, key) => <Car key={key} {...car} />)}
+                        {/* {carList?.map((car: car, key) => <Car key={key} {...car} />)} */}
                     </Suspense>
                 </div>
             </div>
