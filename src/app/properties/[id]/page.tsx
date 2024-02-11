@@ -100,7 +100,7 @@ export default async function HouseOverlay({ params }: { params: Params }) {
 
               <p className="text-sm text-slate-600">Year Built</p>
             </div>
-            
+
           </div>
         </div>
 
@@ -147,7 +147,7 @@ export default async function HouseOverlay({ params }: { params: Params }) {
           <ul>
                 {Object.entries(house.features).map(([feature, available]) => (
                     available && 
-                    <div className="flex gap-2 items-center">
+                    <div key={feature} className="flex gap-2 items-center">
                       <img src="/icons/check.svg" alt="check" className="h-4" />
                       <li key={feature}>{feature}</li>
                     </div>
