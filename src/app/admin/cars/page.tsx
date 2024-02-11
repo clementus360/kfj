@@ -1,5 +1,4 @@
 import AddHouse from "./AddCar";
-import { ItemCard } from "../ItemCard";
 import { fetchCars } from "@/utils/data";
 import { car } from "@/utils/types";
 import { CarCard } from "./carCard";
