@@ -100,9 +100,7 @@ export default async function HouseOverlay({ params }: { params: Params }) {
 
               <p className="text-sm text-slate-600">Year Built</p>
             </div>
-
-
-
+            
           </div>
         </div>
 
