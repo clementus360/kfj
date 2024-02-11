@@ -1,6 +1,6 @@
 import { car, house } from "@/utils/types";
 
-export function CarCard(house:house | car) {
+export function CarCard(house:car) {
     return (
         <div className="flex flex-col lg:flex-row gap-4 w-full items-center justify-between shadow-lg rounded-md py-8 lg:py-0 lg:pr-8 overflow-hidden">
             <img src={house.cover} alt="test" className="w-60 bg-black" />
