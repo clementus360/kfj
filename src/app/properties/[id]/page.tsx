@@ -14,7 +14,7 @@ export default async function HouseOverlay({ params }: { params: Params }) {
   const house: house | null = await fetchSingleHouse(params.id)
 
   return (
-    <section className="flex flex-col gap-8  bg-opacity-80 w-10/12 m-auto ">
+    <section className="flex flex-col gap-8  bg-opacity-80 w-10/12 m-auto pt-20">
 
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-4 w-full justify-between pt-40 lg:pt-12 pb-4">
         <div className="flex flex-col gap-4">

@@ -68,3 +68,69 @@ export const locations = {
     Nyamagabe: "Nyamagabe",
     Rutsiro: "Rutsiro",
   };
+
+
+  export const trimLevelOptions = [
+    "Base",
+    "Sport",
+    "Luxury",
+    "Premium",
+    "Limited",
+    "Performance",
+    "Executive",
+    "Platinum",
+    "Ultimate",
+    // Add more options as needed
+];
+
+export const makeOptions = [
+    "Chevrolet",
+    "Chrysler",
+    "Dodge",
+    "Ford",
+    "GMC",
+    "Honda",
+    "Hyundai",
+    "Infiniti",
+    "Jeep",
+    "Kia",
+    "Land Rover",
+    "Lexus",
+    "Lincoln",
+    "Mazda",
+    "Mercedes-Benz",
+    "Mitsubishi",
+    "Nissan",
+    "Ram",
+    "Subaru",
+    "Toyota",
+    "Volkswagen",
+    "Volvo",
+    // Add more options as needed
+];
+
+export const modelOptions = {
+    "Chevrolet": ["Camaro", "Colorado", "Equinox", "Malibu", "Silverado", "Tahoe", "Traverse"],
+    "Chrysler": ["300", "Pacifica"],
+    "Dodge": ["Challenger", "Charger", "Durango", "Grand Caravan", "Journey"],
+    "Ford": ["Edge", "Escape", "Expedition", "Explorer", "F-150", "Fusion", "Mustang"],
+    "GMC": ["Acadia", "Sierra", "Terrain", "Yukon"],
+    "Honda": ["Accord", "Civic", "CR-V", "HR-V", "Odyssey", "Pilot"],
+    "Hyundai": ["Elantra", "Kona", "Santa Fe", "Sonata", "Tucson"],
+    "Infiniti": ["Q50", "QX50", "QX60", "QX80"],
+    "Jeep": ["Cherokee", "Grand Cherokee", "Renegade", "Wrangler"],
+    "Kia": ["Forte", "Optima", "Sorento", "Sportage", "Telluride"],
+    "Land Rover": ["Discovery", "Range Rover", "Range Rover Sport"],
+    "Lexus": ["ES", "GX", "NX", "RX", "UX"],
+    "Lincoln": ["Aviator", "Corsair", "Nautilus", "Navigator"],
+    "Mazda": ["CX-3", "CX-5", "CX-9", "Mazda3", "Mazda6"],
+    "Mercedes-Benz": ["C-Class", "E-Class", "GLC", "GLE", "S-Class"],
+    "Mitsubishi": ["Eclipse Cross", "Outlander", "Outlander Sport"],
+    "Nissan": ["Altima", "Maxima", "Murano", "Rogue", "Sentra", "Titan"],
+    "Ram": ["1500", "2500", "3500"],
+    "Subaru": ["Ascent", "Forester", "Outback"],
+    "Toyota": ["Camry", "Corolla", "Highlander", "RAV4", "Sienna", "Tundra"],
+    "Volkswagen": ["Atlas", "Golf", "Jetta", "Tiguan"],
+    "Volvo": ["S60", "S90", "XC40", "XC60", "XC90"],
+    // Add more options as needed
+};

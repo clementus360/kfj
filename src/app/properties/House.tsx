@@ -1,7 +1,9 @@
 import { house } from "@/utils/types";
 
 
-export default function House({ houseId, cover,
+export default function House({
+  houseId,
+  cover,
   name,
   email,
   phone,
@@ -14,7 +16,8 @@ export default function House({ houseId, cover,
   address,
   price,
   description,
-  date_added }: house) {
+  date_added
+}: house) {
 
   return (
     <div className="flex flex-col gap-2 w-full lg:w-min lg:min-w-[360px] bg-slate-200 p-4 rounded-md shadow-lg">
@@ -22,8 +25,8 @@ export default function House({ houseId, cover,
       <img src={cover} alt="house name" className="bg-black w-full rounded-md aspect-video" />
 
       <div className="flex gap-2 items-center">
-          <p className="text-lg font-bold text-slate-600">{propertyType}</p>
-        </div>
+        <p className="text-lg font-bold text-slate-600">{propertyType}</p>
+      </div>
 
       <div className="flex flex-col gap-2">
         <div className="flex gap-2 items-center">

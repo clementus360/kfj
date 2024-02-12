@@ -14,11 +14,13 @@ enum Feature {
     Pool = "pool",
     Lawn = "lawn",
     Shower = "shower",
+    Kitchen = "kitchen"
     // Add more features as needed
 }
 
 export default function HouseForm() {
     const [cover, setCover] = useState<File | null>(null);
+    const [images, setImages] = useState<File[]>([])
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
@@ -51,6 +53,12 @@ export default function HouseForm() {
     const handleCover = (e: ChangeEvent<HTMLInputElement>) => {
         setCover(e.target.files ? e.target.files[0] : null);
     };
+
+    function handleImages(e: { target: { files: any; }; }): void {
+        const fileList = e.target.files;
+        const imageList: any = Array.from(fileList);
+        setImages(imageList);
+    }
 
     const handlePrice = (e: { target: { value: SetStateAction<string>; }; }) => {
         setPrice(e.target.value);
@@ -97,18 +105,17 @@ export default function HouseForm() {
     };
 
 
-    type FeatureKey = keyof typeof features;
     const handleFeatureChange = (feature: string) => {
-        const lowercaseFeature = feature.toLowerCase() as FeatureKey;
-        if (lowercaseFeature in features) {
-            setFeatures({
-                ...features,
-                [lowercaseFeature]: !features[lowercaseFeature],
-            });
+        if (feature in features) {
+            setFeatures(prevFeatures => ({
+                ...prevFeatures,
+                [feature]: !prevFeatures[feature as keyof typeof features], // Assert feature as keyof typeof features
+            }));
         }
     };
 
     function uploadHouse() {
+        setError("")
 
         if (
             cover &&
@@ -126,8 +133,6 @@ export default function HouseForm() {
             price &&
             description
         ) {
-
-            setError("")
             const house: houseData = {
                 name: name,
                 email: email,
@@ -146,6 +151,7 @@ export default function HouseForm() {
                 description: description,
                 features: features,
                 cover: cover,
+                images: images,
                 date_added: Date.now(),
             };
 
@@ -202,6 +208,10 @@ export default function HouseForm() {
                     <p>Add Cover</p>
                     <input onChange={handleCover} type="file" accept="image/*" className="w-full h-8 px-2 border-b-2 focus:border-accent outline-none bg-transparent transition-all" />
                 </div>
+                <div>
+                    <p>Add Images</p>
+                    <input onChange={handleImages} type="file" accept="image/*" multiple className="w-full h-8 px-2 border-b-2 focus:border-accent outline-none bg-transparent transition-all" />
+                </div>
                 <input onChange={handleNameChange} value={name} type="text" name="name" placeholder="Property Name" className="h-8 px-2 border-b-2 focus:border-accent outline-none bg-transparent transition-all" />
                 <input onChange={handleEmailChange} value={email} type="email" name="email" placeholder="Your Email" className="h-8 px-2 border-b-2 focus:border-accent outline-none bg-transparent transition-all" />
                 <input onChange={handlePhoneChange} value={phone} type="tel" name="phone" placeholder="Your Phone Number" className="h-8 px-2 border-b-2 focus:border-accent outline-none bg-transparent transition-all" />
@@ -212,17 +222,17 @@ export default function HouseForm() {
                     <option value="Shop">Shop</option>
                     <option value="Residential">Residential</option>
                     <option value="Appartment">Appartment</option>
-                </select>  
+                </select>
                 <select value={propertyStatus} onChange={(e) => setPropertyStatus(e.target.value)} className="h-8 px-2 border-b-2 focus:border-accent outline-none bg-transparent transition-all">
                     <option value="">Select Property Status</option>
                     <option value="sale">For Sale</option>
                     <option value="rent">For Rent</option>
-                </select>               
+                </select>
                 <input onChange={handlePrice} value={price} type="text" name="price" placeholder="Enter price" className="h-8 px-2 border-b-2 focus:border-accent outline-none bg-transparent transition-all" />
-                <input onChange={handleBedrooms} value={bedrooms} type="number" name="bedrooms" placeholder="Bedrooms" className="h-8 px-2 border-b-2 focus:border-accent outline-none bg-transparent transition-all" />
-                <input onChange={handleBathrooms} value={bathrooms} type="number" name="bathrooms" placeholder="Bathrooms" className="h-8 px-2 border-b-2 focus:border-accent outline-none bg-transparent transition-all" />
-                <input onChange={handleSqFt} value={sqFt} type="number" name="sqFt" placeholder="Sq Ft" className="h-8 px-2 border-b-2 focus:border-accent outline-none bg-transparent transition-all" />
-                <input onChange={handleYearBuilt} value={yearBuilt} type="number" name="yearBuilt" placeholder="Year Built" className="h-8 px-2 border-b-2 focus:border-accent outline-none bg-transparent transition-all" />
+                <input onChange={handleBedrooms} value={bedrooms} min={0} type="number" name="bedrooms" placeholder="Bedrooms" className="h-8 px-2 border-b-2 focus:border-accent outline-none bg-transparent transition-all" />
+                <input onChange={handleBathrooms} value={bathrooms} min={0} type="number" name="bathrooms" placeholder="Bathrooms" className="h-8 px-2 border-b-2 focus:border-accent outline-none bg-transparent transition-all" />
+                <input onChange={handleSqFt} value={sqFt} min={0} type="number" name="sqFt" placeholder="Sq Ft" className="h-8 px-2 border-b-2 focus:border-accent outline-none bg-transparent transition-all" />
+                <input onChange={handleYearBuilt} value={yearBuilt} min={0} type="number" name="yearBuilt" placeholder="Year Built" className="h-8 px-2 border-b-2 focus:border-accent outline-none bg-transparent transition-all" />
                 <input onChange={handleAddressArea} value={addressArea} type="text" name="addressArea" placeholder="Address Area" className="h-8 px-2 border-b-2 focus:border-accent outline-none bg-transparent transition-all" />
                 <input onChange={handleAddressStreet} value={addressStreet} type="text" name="addressStreet" placeholder="Address Street" className="h-8 px-2 border-b-2 focus:border-accent outline-none bg-transparent transition-all" />
                 {/* Checkboxes for features */}
@@ -233,7 +243,13 @@ export default function HouseForm() {
                 <div className="flex justify-between flex-wrap">
                     {Object.entries(features).map(([key, value]) => (
                         <div key={key}>
-                            <input type="checkbox" id={key} checked={value} onChange={() => handleFeatureChange(key)} />
+                            <input
+                                type="checkbox"
+                                id={key}
+                                checked={value} // Use value directly, it's already a boolean
+                                onChange={() => handleFeatureChange(key)}
+                                key={key} // Unique key for each checkbox
+                            />
                             <label htmlFor={key}>{key}</label>
                         </div>
                     ))}
@@ -241,6 +257,7 @@ export default function HouseForm() {
                 <button disabled={disabled} className="bg-blue-800 disabled:bg-slate-400 text-white px-4 py-2 rounded-md">Add House</button>
             </form>
 
+            {/* Success and error messages */}
             {success &&
                 <div className="fixed z-50 flex justify-center m-auto bottom-0 left-0 w-screen p-4 bg-black bg-opacity-80 rounded-md">
                     <h1 className="text-2xl text-green-600">House uploaded successfully</h1>
@@ -252,7 +269,6 @@ export default function HouseForm() {
                     <h1 className="text-2xl text-red-600">{error}</h1>
                 </div>
             }
-            {/* Success and error messages */}
         </div>
     );
 }

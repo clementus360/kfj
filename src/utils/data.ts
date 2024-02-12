@@ -9,6 +9,7 @@ import { addCommasToPrice, formatCurrency, formatTimestamp } from "./helpers";
 
 export async function addHouse({
   cover,
+  images,
   name,
   email,
   phone,
@@ -33,11 +34,24 @@ export async function addHouse({
   const snapshot = await uploadBytes(storageRef, cover);
   const coverLink = await getDownloadURL(snapshot.ref);
 
+  let imageList = []
+
+  for (let i = 0; i < images.length; i++) {
+    const storage = getStorage()
+    const storageRef = ref(storage, `${houseId}-${i}.png`)
+
+    const snapshot = await uploadBytes(storageRef, images[i]);
+    const imageLink = await getDownloadURL(snapshot.ref);
+
+    imageList.push(imageLink)
+  }
+
   const db = getFirestore(app);
 
   await setDoc(doc(db, 'houses', houseId), {
     houseId,
     cover: coverLink,
+    images: imageList,
     price,
     address,
     description,
@@ -65,6 +79,7 @@ export async function fetchHouses(): Promise<house[]> {
     return {
       houseId: doc.id,
       name: data.name,
+      images: data.images,
       email: data.email,
       propertyType: data.propertyType,
       propertyStatus: data.propertyStatus,
@@ -113,20 +128,36 @@ export async function fetchSingleHouse(id: string): Promise<house | null> {
     date_added: formatTimestamp(houseData.date_added),
     yearBuilt: houseData.yearBuilt,
     phone: houseData.phone,
+    images: houseData.images
   };
 
   return house;
 }
 
 
-export async function addCar({ location, price, cover_image, images, description, date_added, phone }: carData) {
+export async function addCar({
+  cover,
+  make,
+  model,
+  yearBuilt,
+  trimLevel,
+  mileage,
+  price,
+  description,
+  email,
+  phone,
+  address,
+  features,
+  images,
+  date_added
+}: carData) {
 
   const carId = uniqid()
 
   const storage = getStorage()
   const storageRef = ref(storage, `${carId}.png`)
 
-  const snapshot = await uploadBytes(storageRef, cover_image);
+  const snapshot = await uploadBytes(storageRef, cover);
   const coverLink = await getDownloadURL(snapshot.ref);
 
   let imageList = []
@@ -146,12 +177,19 @@ export async function addCar({ location, price, cover_image, images, description
   await setDoc(doc(db, 'cars', carId), {
     carId,
     cover: coverLink,
+    make,
+    model,
+    yearBuilt,
+    trimLevel,
+    mileage,
     price,
-    location,
     description,
-    date_added,
+    email,
     phone,
+    address,
+    features,
     images: imageList,
+    date_added
   })
 }
 
@@ -164,13 +202,20 @@ export async function fetchCars(): Promise<car[]> {
     const data = doc.data();
     return {
       carId: doc.id,
-      location: data.location,
-      price: formatCurrency(data.price),
       cover: data.cover,
-      images: data.images,
+      make: data.make,
+      model: data.model,
+      yearBuilt: data.yearBuilt,
+      trimLevel: data.trimLevel,
+      mileage: data.mileage,
+      price: formatCurrency(data.price),
       description: data.description,
-      date_added: formatTimestamp(data.date_added),
+      email: data.email,
       phone: data.phone,
+      address: data.address,
+      features: data.features,
+      images: data.images,
+      date_added: formatTimestamp(data.date_added)
     };
   });
 
@@ -190,15 +235,33 @@ export async function fetchSingleCar(id: string): Promise<car | null> {
 
   const car: car = {
     carId: querySnapshot.docs[0].id,
-    location: carData.location,
-    price: formatCurrency(carData.price),
     cover: carData.cover,
-    images: carData.images,
+    make: carData.make,
+    model: carData.model,
+    yearBuilt: carData.yearBuilt,
+    trimLevel: carData.trimLevel,
+    mileage: carData.mileage,
+    price: formatCurrency(carData.price),
     description: carData.description,
-    date_added: formatTimestamp(carData.date_added),
+    email: carData.email,
     phone: carData.phone,
+    address: carData.address,
+    features: carData.features,
+    images: carData.images,
+    date_added: formatTimestamp(carData.date_added)
   };
 
   return car;
 }
 
+
+
+// for (let i = 0; i < images.length; i++) {
+//   const storage = getStorage()
+//   const storageRef = ref(storage, `${carId}-${i}.png`)
+
+//   const snapshot = await uploadBytes(storageRef, images[i]);
+//   const imageLink = await getDownloadURL(snapshot.ref);
+
+//   imageList.push(imageLink)
+// }

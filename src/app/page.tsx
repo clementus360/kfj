@@ -8,7 +8,7 @@ function Hero() {
       <div className="relative z-20 lg:grid lg:grid-cols-[2fr_3fr] gap-8 items-center px-8 w-5/6 ">
         <div className="flex flex-col gap-4 text-white">
           <h1 className="text-6xl font-black">THE BEST DEALS IN ONE PLACE</h1>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit delectus voluptatibus dolores officiis necessitatibus alias reprehenderit! Autem repellendus non in?</p>
+          <p>Unlocking opportunities, driving success - Willy Investment Group, your trusted partner in property and automotive excellence.</p>
         </div>
         <img src="https://firebasestorage.googleapis.com/v0/b/broker-14bcb.appspot.com/o/3d-view-house-model.png?alt=media&token=633ed869-5c42-438f-a755-4a035a76fe7b" alt="image" className="hidden lg:block" />
       </div>

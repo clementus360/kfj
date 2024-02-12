@@ -8,7 +8,6 @@ export default function Page() {
                 <div className="relative z-20 lg:grid lg:grid-cols-[2fr_3fr] gap-8 items-center px-8 lg:w-5/6 ">
                     <div className="flex flex-col gap-4 text-white">
                         <h1 className="text-6xl font-black uppercase">Willy Investment Group</h1>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit delectus voluptatibus dolores officiis necessitatibus alias reprehenderit! Autem repellendus non in?</p>
                     </div>
                     <img src="https://firebasestorage.googleapis.com/v0/b/broker-14bcb.appspot.com/o/3d-view-house-model.png?alt=media&token=633ed869-5c42-438f-a755-4a035a76fe7b" alt="image" className="hidden lg:block" />
                 </div>
@@ -19,7 +18,7 @@ export default function Page() {
             <section className="flex flex-col lg:grid lg:grid-cols-[2fr_3fr] gap-16 items-center justify-center px-8 lg:px-32 pt-24 h-max">
 
 
-                <img src="https://firebasestorage.googleapis.com/v0/b/broker-14bcb.appspot.com/o/african-business-male-people-shaking-hands.png?alt=media&token=2486d508-0cf4-4a31-9089-b85a8ea3e340" alt="image" className="w-full bg-black h-full rounded-md" />
+                <img src="https://firebasestorage.googleapis.com/v0/b/broker-14bcb.appspot.com/o/african-business-male-people-shaking-hands.jpg?alt=media&token=6b557564-6972-4ac0-8ff7-2d6ed990c25a" alt="image" className="w-full bg-black h-full rounded-md" />
 
                 <div className="flex flex-col gap-4">
 

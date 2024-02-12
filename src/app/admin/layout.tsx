@@ -7,7 +7,7 @@ export default function layout({children}: Readonly<{
   }>) {
 
     return (
-        <div className="flex flex-col gap-8 w-full  lg:w-8/12 m-auto py-8 ">
+        <div className="flex flex-col gap-8 w-full  lg:w-8/12 m-auto pt-32 ">
             <section className="flex w-full lg:w-8/12 m-auto shadow-lg justify-between items-center rounded-md overflow-hidden">
                 <a href="/admin/houses" className="w-full h-full"><button className={`w-full py-4 bg-white `}>Houses</button></a>
                 <div className="w-[2px] h-12 bg-slate-400"></div>

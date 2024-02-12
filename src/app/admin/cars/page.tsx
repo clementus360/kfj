@@ -8,7 +8,7 @@ export default async function Page() {
     let carList: Array<car> = await fetchCars();
 
     return (
-        <section className="flex flex-col gap-8 px-32 bg-slate-100 rounded-md py-8">
+        <section className="flex flex-col gap-8 px-8 lg:px-32 bg-slate-100 rounded-md py-8">
 
             <AddHouse />
 

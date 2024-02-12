@@ -32,7 +32,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
                 placeholder={placeholder}
                 id="house-search"
             />
-            <button className="text-black font-bold py-2 px-4 rounded-md w-full lg:w-max bg-white hover:bg-slate-200">Search</button>
+            <button className=" font-bold py-2 px-4 rounded-md w-full lg:w-max bg-green-600 text-white hover:bg-slate-200">Search</button>
         </div>
     )
 }

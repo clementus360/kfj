@@ -1,6 +1,6 @@
 import AddHouse from "./AddHouse";
 import { fetchHouses } from "@/utils/data";
-import { house, houseData } from "@/utils/types";
+import { house } from "@/utils/types";
 import { HouseCard } from "./houseCard";
 
 export default async function Page() {
