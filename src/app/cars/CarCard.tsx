@@ -2,7 +2,7 @@
 
 import { car } from "@/utils/types";
 
-export default function Car({
+export default function CarCard({
   carId,
   cover,
   make,
