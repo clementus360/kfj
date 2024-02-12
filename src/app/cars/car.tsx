@@ -1,7 +1,6 @@
 import { car } from "@/utils/types";
 
-
-export default function Car({
+function Car({
   carId,
   cover,
   make,
@@ -69,3 +68,5 @@ export default function Car({
     </div>
   )
 }
+
+export default Car;
