@@ -1,8 +1,8 @@
 import { house } from "@/utils/types";
 import { fetchHouses } from "@/utils/data";
-import { FeaturedCarousel } from "./FeaturedCarousel";
+import { FeaturedHouseCarousel } from "./FeaturedHouseCarousel";
 
-export async function Featured() {
+export async function FeaturedHouses() {
 
   let houseList: Array<house> = await fetchHouses();
 
@@ -13,7 +13,7 @@ export async function Featured() {
         <p className="text-sm text-slate-700 font-light w-10/12 lg:w-4/12">Discover our featured listings and find the perfect home that matches your lifestyle and aspirations.</p>
       </div>
 
-      {houseList && <FeaturedCarousel houseList={houseList} />}
+      {houseList && <FeaturedHouseCarousel houseList={houseList} />}
     </section>
   );
 }

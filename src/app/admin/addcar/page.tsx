@@ -132,7 +132,8 @@ export default function CarForm() {
 
     function uploadCar() {
         setError("")
-        console.log(make, model, yearBuilt, trimLevel,mileage, price, description, email, phone, addressArea, addressStreet)
+        setDisabled(() => true)
+        
         if (
             cover &&
             make &&
@@ -203,9 +204,11 @@ export default function CarForm() {
                 });
             } catch (err: any) {
                 setError(err.message || "An error occurred");
+                setDisabled(false);
             }
         } else {
             setError("Fill all fields");
+            setDisabled(false);
         }
 
         setDisabled(false);
@@ -276,9 +279,9 @@ export default function CarForm() {
 
                 {/* Additional input fields... */}
                 {/* Checkboxes for features */}
-                <div className="flex justify-between flex-wrap">
+                <div className="flex lg:grid lg:grid-cols-4 gap-2 justify-between flex-wrap">
                     {Object.entries(features).map(([key, value]) => (
-                        <div key={key}>
+                        <div key={key} className="flex items-center gap-2">
                             <input
                                 type="checkbox"
                                 id={key}
@@ -290,13 +293,13 @@ export default function CarForm() {
                         </div>
                     ))}
                 </div>
-                <button disabled={disabled} className="bg-blue-800 disabled:bg-slate-400 text-white px-4 py-2 rounded-md">Add House</button>
+                <button disabled={disabled} className="bg-green-600 disabled:bg-slate-400 text-white px-4 py-2 rounded-md">Add Car</button>
             </form>
 
             {/* Success and error messages */}
             {success &&
                 <div className="fixed z-50 flex justify-center m-auto bottom-0 left-0 w-screen p-4 bg-black bg-opacity-80 rounded-md">
-                    <h1 className="text-2xl text-green-600">House uploaded successfully</h1>
+                    <h1 className="text-2xl text-green-600">Car uploaded successfully</h1>
                 </div>
             }
 

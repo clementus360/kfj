@@ -32,7 +32,7 @@ export default async function CarOverlay({params}:{params: Params}) {
           </div>
 
           <div className="flex gap-3 items-center">
-            <p className="text-2xl lg:text-xl font-light text-slate-600">{car?.mileage} <span className="font-light text-sm lg:text-lg">L/100Km</span></p>
+            <p className="text-2xl lg:text-xl font-light text-slate-600">{car?.mileage} <span className="font-light text-sm lg:text-lg">Km</span></p>
           </div>
         </div>
       </div>
@@ -82,7 +82,7 @@ export default async function CarOverlay({params}:{params: Params}) {
             <div>
               <div className="flex gap-2 items-center">
                 <img src="/icons/mileage.svg" alt="mileage" className="h-4" />
-                <p className="font-bold">{car?.mileage} L/100Km</p>
+                <p className="font-bold">{car?.mileage} Km</p>
               </div>
 
               <p className="text-sm text-slate-600">Mileage</p>

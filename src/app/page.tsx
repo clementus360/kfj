@@ -1,5 +1,6 @@
 import { Contact } from "./Contact";
-import { Featured } from "./Featured";
+import { FeaturedCars } from "./FeaturedCars";
+import { FeaturedHouses } from "./FeaturedHouses";
 
 function Hero() {
   return (
@@ -60,7 +61,8 @@ export default async function Home() {
   return (
     <main className="">
       <Hero />
-      <Featured />
+      <FeaturedHouses />
+      <FeaturedCars />
       <Services />
       <Contact />
     </main>

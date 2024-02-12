@@ -116,6 +116,7 @@ export default function HouseForm() {
 
     function uploadHouse() {
         setError("")
+        setDisabled(() => true)
 
         if (
             cover &&

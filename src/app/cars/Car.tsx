@@ -2,7 +2,7 @@
 
 import { car } from "@/utils/types";
 
-export default function CarCard({
+export default function Car({
   carId,
   cover,
   make,
@@ -44,7 +44,7 @@ export default function CarCard({
 
           <div className="flex gap-2 items-center">
             <img src="/icons/mileage.svg" alt="bed" className="h-5" />
-            <p className="font-normal text-sm">{mileage}</p>
+            <p className="font-normal text-sm">{mileage} Km</p>
           </div>
 
           <div className="flex gap-2 items-center">

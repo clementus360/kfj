@@ -1,5 +1,4 @@
-import { Featured } from "../Featured";
-import { FeaturedCarousel } from "../FeaturedCarousel";
+import { FeaturedHouses } from "../FeaturedHouses";
 
 export default function Page() {
     return (
@@ -34,7 +33,7 @@ export default function Page() {
 
             </section>
 
-            <Featured />
+            <FeaturedHouses />
         </>
     );
 }

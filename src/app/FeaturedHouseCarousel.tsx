@@ -12,7 +12,7 @@ interface FeaturedCarouselProps {
   houseList: Array<house>;
 }
 
-export function FeaturedCarousel({ houseList }: FeaturedCarouselProps) {
+export function FeaturedHouseCarousel({ houseList }: FeaturedCarouselProps) {
 
   const settings = {
     dots: true,
