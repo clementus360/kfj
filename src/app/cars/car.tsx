@@ -1,3 +1,5 @@
+"use client"
+
 import { car } from "@/utils/types";
 
 export default function Car({
