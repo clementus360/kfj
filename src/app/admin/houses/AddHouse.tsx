@@ -1,6 +1,4 @@
 export default function AddHouse() {
-
-
     return (
         <div className="flex w-full justify-between items-center border-b-[1px] border-black py-4 px-4">
             <h2 className="font-bold text-xl">Houses List</h2>

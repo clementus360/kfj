@@ -153,6 +153,19 @@ export default async function CarOverlay({params}:{params: Params}) {
         </div>
         }
 
+      <div className="flex flex-col gap-4 bg-white rounded-md shadow-lg w-full py-8 px-4 lg:px-16">
+          <div className="flex justify-between w-full">
+            <h2 className="text-xl font-medium">Gallery</h2>
+          </div>
+          <hr />
+
+          <div className="grid grid-cols-3 gap-4">
+            {car?.images.map((image,key) => (
+              <img key={key} src={image} alt="" />
+            ))}
+          </div>
+          </div>
+
       </div>
     </section>
     )

@@ -42,7 +42,7 @@ export default async function HouseOverlay({ params }: { params: Params }) {
       </div>
 
       <div className="relative w-full object-cover h-[60vw] lg:h-[30vw] overflow-hidden">
-        <img src={house?.cover} alt="house" className="absolute top-0 left-0 bg-black" />
+        <img src={house?.cover} alt="house" className="absolute top-0 left-0 w-full bg-black" />
       </div>
 
       <div className="flex flex-col gap-8 items-center">
@@ -137,27 +137,44 @@ export default async function HouseOverlay({ params }: { params: Params }) {
           </div>
         </div>
 
-        {house?.features && 
-        <div className="flex flex-col gap-4 bg-white rounded-md shadow-lg w-full py-8 px-4 lg:px-16">
-          <div className="flex justify-between w-full">
-            <h2 className="text-xl font-medium">Features</h2>
-          </div>
-          <hr />
-          <div className="grid grid-cols-2 gap-8">
-          <ul>
+        {house?.features &&
+          <div className="flex flex-col gap-4 bg-white rounded-md shadow-lg w-full py-8 px-4 lg:px-16">
+            <div className="flex justify-between w-full">
+              <h2 className="text-xl font-medium">Features</h2>
+            </div>
+            <hr />
+            <div className="grid grid-cols-2 gap-8">
+              <ul>
                 {Object.entries(house.features).map(([feature, available]) => (
-                    available && 
-                    <div key={feature} className="flex gap-2 items-center">
-                      <img src="/icons/check.svg" alt="check" className="h-4" />
-                      <li key={feature}>{feature}</li>
-                    </div>
+                  available &&
+                  <div key={feature} className="flex gap-2 items-center">
+                    <img src="/icons/check.svg" alt="check" className="h-4" />
+                    <li key={feature}>{feature}</li>
+                  </div>
                 ))}
-            </ul>
+              </ul>
+            </div>
           </div>
-        </div>
         }
 
       </div>
+
+      {house?.images &&
+        <div className="flex flex-col gap-4 bg-white rounded-md shadow-lg w-full py-8 px-4 lg:px-16">
+          <div className="flex justify-between w-full">
+            <h2 className="text-xl font-medium">Gallery</h2>
+          </div>
+          <hr />
+
+          <div className="grid grid-cols-3 gap-4">
+            {house?.images.map((image, key) => (
+              <img key={key} src={image} alt="" />
+            ))}
+          </div>
+
+        </div>}
+
+
     </section>
   )
 }
