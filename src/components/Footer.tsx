@@ -16,10 +16,10 @@ export function Footer() {
 		  <ul className="flex gap-4">
 			{/* <a href="" target="_blank"><li className="w-10 h-10 p-2 rounded-lg border-[0.1rem] border-black"><Image src={facebook} width={'50%'}></Image></li></a>
 			<a href="" target="_blank"><li className="w-10 h-10 p-2 rounded-lg border-[0.1rem] border-black"><Image src={twitter} width={'50%'}></Image></li></a>		 */}
-			<a href="/" target="_blank"><li className="w-10 h-10 p-2 rounded-lg border-[0.1rem] border-black"><Image src={youtube} width={50} alt={""}></Image></li></a>
+			{/* <a href="/" target="_blank"><li className="w-10 h-10 p-2 rounded-lg border-[0.1rem] border-black"><Image src={youtube} width={50} alt={""}></Image></li></a> */}
 			{/* <a href="" target="_blank"><li className="w-10 h-10 p-2 rounded-lg border-[0.1rem] border-black"><Image src={linkedin} width={'50%'}></Image></li></a>			 */}
-			<a href="/" target="_blank"><li className="w-10 h-10 p-2 rounded-lg border-[0.1rem] border-black"><Image src={instagram} width={50} alt={""}></Image></li></a>
-			<a href="/" target="_blank"><li className="w-10 h-10 p-2 rounded-lg border-[0.1rem] border-black"><Image src={flickr} width={50} alt={""}></Image></li></a>
+			<a href="https://www.instagram.com/willy_investmentgroup?igsh=dWxxcTBrb2hmbGlx" target="_blank"><li className="w-10 h-10 p-2 rounded-lg border-[0.1rem] border-black"><Image src={instagram} width={50} alt={""}></Image></li></a>
+			{/* <a href="/" target="_blank"><li className="w-10 h-10 p-2 rounded-lg border-[0.1rem] border-black"><Image src={flickr} width={50} alt={""}></Image></li></a> */}
 		  </ul>
 		</div>
 		<div>
