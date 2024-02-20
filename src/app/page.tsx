@@ -1,4 +1,3 @@
-import AdCarousel from "./AdsCarousel";
 import { Contact } from "./Contact";
 import FeaturedAds from "./FeaturedAds";
 import { FeaturedCars } from "./FeaturedCars";
@@ -7,13 +6,14 @@ import { FeaturedHouses } from "./FeaturedHouses";
 function Hero() {
   return (
     // <section className={`relative z-100 top-0 flex items-center justify-center w-full pt-24 h-[60vh] bg-gradient-to-r from-black to-transparent bg-cover `} style={{ backgroundImage: 'url("https://firebasestorage.googleapis.com/v0/b/broker-14bcb.appspot.com/o/24725.jpg?alt=media&token=e33fa891-8f03-452b-b0e7-80944da520cd")' }}>
-    <section className={`relative z-100 top-0 flex items-center justify-center w-full pt-24 h-[60vh] bg-gradient-to-r from-black to-transparent bg-cover `}>
-      <div className="relative z-20 lg:grid lg:grid-cols-[2fr_3fr] gap-8 items-center px-8 w-5/6 ">
-        <div className="flex flex-col gap-4 text-white">
+    <section className={`relative z-100 top-0 flex items-center justify-center w-full pt-24 lg:h-[60vh] bg-gradient-to-r from-black to-transparent bg-cover bg-center`} style={{ backgroundImage: 'url("https://firebasestorage.googleapis.com/v0/b/broker-14bcb.appspot.com/o/carton-house-model-and-toy-car-on-document-banner-2023-11-27-05-05-11-utc.png?alt=media&token=ad23d2a9-1e9b-4707-b1e6-fdf352bc9597")' }}>
+
+      <div className="relative z-20 lg:grid lg:grid-cols-[2fr_3fr] gap-8 items-center lg:px-8 w-5/6 ">
+        <div className="py-16 lg:py-0 flex flex-col gap-4 text-white">
           <h1 className="text-6xl font-black">THE BEST DEALS IN ONE PLACE</h1>
           <p>Unlocking opportunities, driving success - Willy Investment Group, your trusted partner in property and automotive excellence.</p>
         </div>
-        <img src="https://firebasestorage.googleapis.com/v0/b/broker-14bcb.appspot.com/o/3d-view-house-model.png?alt=media&token=633ed869-5c42-438f-a755-4a035a76fe7b" alt="image" className="hidden lg:block" />
+        {/* <img src="https://firebasestorage.googleapis.com/v0/b/broker-14bcb.appspot.com/o/3d-view-house-model.png?alt=media&token=633ed869-5c42-438f-a755-4a035a76fe7b" alt="image" className="hidden lg:block" /> */}
       </div>
 
       <div className="absolute z-0 top-0 left-0 bg-black bg-opacity-60  h-full w-full"></div>
