@@ -1,11 +1,13 @@
-import { car, carData, house, houseData } from "./types";
+import { ad, adsData, car, carData, house, houseData } from "./types";
 
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { getFirestore, setDoc, query, where, collection, getDocs, doc, QueryDocumentSnapshot, DocumentData } from "firebase/firestore";
+import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
+import { getFirestore, setDoc, query, where, collection, getDocs, doc, QueryDocumentSnapshot, DocumentData, deleteDoc, getDoc } from "firebase/firestore";
 
 import uniqid from 'uniqid';
 import { app } from "@/utils/firebase";
 import { addCommasToPrice, formatCurrency, formatTimestamp } from "./helpers";
+
+import emailjs from "@emailjs/browser"
 
 export async function addHouse({
   cover,
@@ -134,7 +136,6 @@ export async function fetchSingleHouse(id: string): Promise<house | null> {
   return house;
 }
 
-
 export async function addCar({
   cover,
   make,
@@ -255,13 +256,179 @@ export async function fetchSingleCar(id: string): Promise<car | null> {
 }
 
 
+export async function addAd(adData: adsData) {
+  try {
+      // Generate a unique ID for the ad
+      const adId = uniqid();
 
-// for (let i = 0; i < images.length; i++) {
-//   const storage = getStorage()
-//   const storageRef = ref(storage, `${carId}-${i}.png`)
+      // Upload ad image to Firebase Storage
+      const storage = getStorage();
+      const storageRef = ref(storage, `${adId}.png`);
+      await uploadBytes(storageRef, adData.ad);
 
-//   const snapshot = await uploadBytes(storageRef, images[i]);
-//   const imageLink = await getDownloadURL(snapshot.ref);
+      // Get the download URL of the uploaded image
+      const imageUrl = await getDownloadURL(storageRef);
 
-//   imageList.push(imageLink)
-// }
+      // Save ad data to Firestore
+      const db = getFirestore();
+      const adDocRef = doc(db, "ads", adId);
+      await setDoc(adDocRef, {
+          adId: adId,
+          image: imageUrl,
+          description: adData.description,
+          date_added: adData.date_added,
+      });
+
+      console.log("Ad added successfully!");
+  } catch (error) {
+      console.error("Error adding ad:", error);
+      throw error;
+  }
+}
+
+export async function fetchAds(): Promise<ad[]> {
+  try {
+    const db = getFirestore();
+    
+    // Query the "ads" collection
+    const q = query(collection(db, "ads"));
+    
+    // Get the documents in the collection
+    const querySnapshot = await getDocs(q);
+
+    // Map each document to the ad object
+    const ads: ad[] = querySnapshot.docs.map((doc: QueryDocumentSnapshot<DocumentData>) => {
+      const data = doc.data();
+      return {
+        adId: doc.id,
+        ad: data.image,
+        description: data.description,
+        date_added: data.date_added
+      };
+    });
+
+    return ads;
+  } catch (error) {
+    console.error("Error fetching ads:", error);
+    throw error;
+  }
+}
+
+
+
+export async function deleteCar(carId: string) {
+  try {
+    const db = getFirestore();
+    const carRef = doc(db, 'cars', carId);
+    
+    // Get car document data
+    const carDocSnap = await getDoc(carRef);
+    if (!carDocSnap.exists()) {
+      throw new Error('Car document does not exist.');
+    }
+
+    const carData = carDocSnap.data();
+
+    const storage = getStorage();
+
+    // Delete cover from storage
+    const coverImageRef = ref(storage, carData.cover);
+    await deleteObject(coverImageRef);
+
+    // Delete images from storage
+    const images = carData.images || [];
+    const promises = images.map(async (imageUrl: string) => {
+      const imageRef = ref(storage, imageUrl);
+      await deleteObject(imageRef);
+    });
+    await Promise.all(promises);
+
+    // Delete car document from Firestore
+    await deleteDoc(carRef);
+
+    console.log('Car and associated images deleted successfully!');
+  } catch (error) {
+    console.error('Error deleting car and associated images:', error);
+    throw error; // Optional: rethrow the error for handling at a higher level
+  }
+}
+
+export async function deleteAd(adId: string) {
+  try {
+    const db = getFirestore();
+    const adRef = doc(db, 'ads', adId);
+    
+    // Get ad document data
+    const adDocSnap = await getDoc(adRef);
+    if (!adDocSnap.exists()) {
+      throw new Error('Ad document does not exist.');
+    }
+
+    const adData = adDocSnap.data();
+
+    const storage = getStorage();
+
+    // Delete image from storage
+    const imageRef = ref(storage, adData.image);
+    await deleteObject(imageRef);
+
+    // Delete ad document from Firestore
+    await deleteDoc(adRef);
+
+    console.log('Ad and associated image deleted successfully!');
+  } catch (error) {
+    console.error('Error deleting ad and associated image:', error);
+    throw error; // Optional: rethrow the error for handling at a higher level
+  }
+}
+
+export async function deleteHouse(houseId: string) {
+  try {
+    const db = getFirestore();
+    const houseRef = doc(db, 'houses', houseId);
+    
+    // Get house document data
+    const houseDocSnap = await getDoc(houseRef);
+    if (!houseDocSnap.exists()) {
+      throw new Error('House document does not exist.');
+    }
+
+    const houseData = houseDocSnap.data();
+
+    const storage = getStorage();
+
+    // Delete cover from storage
+    const coverImageRef = ref(storage, houseData.cover);
+    await deleteObject(coverImageRef);
+
+    // Delete images from storage
+    const images = houseData.images || [];
+    const promises = images.map(async (imageUrl: string) => {
+      const imageRef = ref(storage, imageUrl);
+      await deleteObject(imageRef);
+    });
+    await Promise.all(promises);
+
+    // Delete house document from Firestore
+    await deleteDoc(houseRef);
+
+    console.log('House and associated images deleted successfully!');
+  } catch (error) {
+    console.error('Error deleting house and associated images:', error);
+    throw error; // Optional: rethrow the error for handling at a higher level
+  }
+}
+
+export async function sendInquiry(formData: HTMLFormElement) {
+  const serviceId = process.env.SERVICE_ID;
+  const templateId = process.env.TEMPLATE_ID;
+  const publicKey = process.env.PUBLIC_KEY;
+
+  console.log(serviceId, templateId, publicKey)
+
+  if (!serviceId || !templateId || !publicKey) {
+      throw new Error("One or more required environment variables are not defined.");
+  }
+
+  await emailjs.sendForm(serviceId, templateId, formData, publicKey);
+}

@@ -1,4 +1,6 @@
+import AdCarousel from "./AdsCarousel";
 import { Contact } from "./Contact";
+import FeaturedAds from "./FeaturedAds";
 import { FeaturedCars } from "./FeaturedCars";
 import { FeaturedHouses } from "./FeaturedHouses";
 
@@ -65,6 +67,8 @@ export default async function Home() {
       <FeaturedCars />
       <Services />
       <Contact />
+
+      <FeaturedAds />
     </main>
   );
 }

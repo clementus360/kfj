@@ -137,3 +137,31 @@ export interface carData {
     images: File[];
     date_added: number;
 }
+
+export interface ad {
+    adId: string;
+    description: string;
+    ad: string;
+    date_added: string;
+}
+
+export interface adsData {
+    description: string;
+    ad: File;
+    date_added: number;
+}
+
+export interface FormData {
+    inquiryType: any;
+    occupation: any;
+    name: any;
+    email: any;
+    phone: any;
+    location: any;
+    propertyType: any;
+    maxPrice: any;
+    minSize: any;
+    bedrooms: any;
+    bathrooms: any;
+    consent: any;
+}

@@ -1,12 +1,12 @@
 "use client"
 
-import { deleteHouse } from "@/utils/data";
+import { deleteAd } from "@/utils/data";
 
-import {house} from "@/utils/types";
+import {ad} from "@/utils/types";
 
 import { useState } from "react";
 
-export function HouseCard(house: house) {
+export function AdCard(ad: ad) {
 
     const [error, setError] = useState("");
     const [disabled, setDisabled] = useState(false);
@@ -16,14 +16,14 @@ export function HouseCard(house: house) {
         setError("");
         setDisabled(true);
     
-        const confirmDelete = window.confirm("Are you sure you want to delete this house?");
+        const confirmDelete = window.confirm("Are you sure you want to delete this ad?");
         if (confirmDelete) {
           try {
-            await deleteHouse(house.houseId);
-            setSuccess("House deleted successfully!");
+            await deleteAd(ad.adId);
+            setSuccess("ad deleted successfully!");
             setDisabled(false);
           } catch (error) {
-            setError("Error deleting house");
+            setError("Error deleting ad");
             setDisabled(false);
           }
         }
@@ -32,32 +32,22 @@ export function HouseCard(house: house) {
     return (
         <div className="flex flex-col lg:flex-row gap-4 w-full items-center justify-between shadow-lg rounded-md py-8 lg:py-0 lg:pr-8 overflow-hidden">
 
-            <a href={`/properties/${house.houseId}`}><img src={house.cover} alt="test" className="w-60 bg-black" /></a>
+            <a href={`/properties/${ad.adId}`}><img src={ad.ad} alt="test" className="w-60 bg-black" /></a>
 
             <div className="flex flex-col gap-2">
                 <div className="flex gap-2 items-center">
                     <img src="/icons/location.svg" alt="location" className="w-6" />
-                    <p className="text-sm">{house.address.area}</p>
-                </div>
-
-                <div className="flex gap-2 items-center">
-                    <img src="/icons/price.svg" alt="price" className="w-6" />
-                    <p className="text-xl font-bold">{house.price} <span className="font-light text-sm">/RWF</span></p>
-                </div>
-
-                <div className="flex gap-2 items-center">
-                    <img src="/icons/phone.svg" alt="price" className="w-6" />
-                    <p className="text-xl font-regular">{house.phone}</p>
+                    <p className="text-sm">{ad.description}</p>
                 </div>
 
             </div>
 
-            <button onClick={handleDelete} className="px-6 py-2 rounded-md bg-red-600 text-white">Delete</button>
+            <button disabled={disabled} onClick={handleDelete} className="px-6 py-2 rounded-md bg-red-600 text-white">Delete</button>
 
             {/* Success and error messages */}
             {success &&
                 <div className="fixed z-50 flex justify-center m-auto bottom-0 left-0 w-screen p-4 bg-black bg-opacity-80 rounded-md">
-                    <h1 className="text-2xl text-green-600">Car deleted successfully</h1>
+                    <h1 className="text-2xl text-green-600">Ad deleted successfully</h1>
                 </div>
             }
 

@@ -4,20 +4,6 @@ import { addHouse } from "@/utils/data";
 import { houseData } from "@/utils/types";
 import { ChangeEvent, SetStateAction, useState } from "react";
 
-enum Feature {
-    AirConditioning = "airConditioning",
-    Wifi = "wifi",
-    Gym = "gym",
-    Laundry = "laundry",
-    Fridge = "fridge",
-    TV = "tv",
-    Pool = "pool",
-    Lawn = "lawn",
-    Shower = "shower",
-    Kitchen = "kitchen"
-    // Add more features as needed
-}
-
 export default function HouseForm() {
     const [cover, setCover] = useState<File | null>(null);
     const [images, setImages] = useState<File[]>([])
@@ -48,6 +34,7 @@ export default function HouseForm() {
     });
     const [error, setError] = useState("");
     const [disabled, setDisabled] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState("");
 
     const handleCover = (e: ChangeEvent<HTMLInputElement>) => {
@@ -188,9 +175,14 @@ export default function HouseForm() {
                         shower: false,
                     });
                     setSuccess("Success");
+                    setTimeout(() => {
+                        setSuccess("")
+                    }, 5000);
                 });
             } catch (err: any) {
                 setError(err.message || "An error occurred");
+            } finally {
+                setLoading(false);
             }
         } else {
             setError("Fill all fields");
@@ -256,6 +248,15 @@ export default function HouseForm() {
                     ))}
                 </div>
                 <button disabled={disabled} className="bg-blue-800 disabled:bg-slate-400 text-white px-4 py-2 rounded-md">Add House</button>
+
+                {/* Loading overlay */}
+                {loading && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                        <div className="spinner-border text-white" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                )}
             </form>
 
             {/* Success and error messages */}

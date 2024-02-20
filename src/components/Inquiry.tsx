@@ -1,9 +1,29 @@
 "use client"
 
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState, useRef } from "react";
 import { locations } from "@/utils/helpers";
 
+import emailjs from "@emailjs/browser"
+
+import { FormData } from "@/utils/types";
+
+async function sendInquiry(formData: HTMLFormElement) {
+    const serviceId = process.env.NEXT_PUBLIC_SERVICE_ID;
+    const templateId = process.env.NEXT_PUBLIC_TEMPLATE_ID;
+    const publicKey = process.env.NEXT_PUBLIC_PUBLIC_KEY;
+
+    console.log(serviceId, templateId, publicKey)
+
+    if (!serviceId || !templateId || !publicKey) {
+        throw new Error("One or more required environment variables are not defined.");
+    }
+
+    await emailjs.sendForm(serviceId, templateId, formData, publicKey);
+}
+
 export default function InquiryForm() {
+    const form = useRef<HTMLFormElement>(null);
+
     const [formData, setFormData] = useState({
         inquiryType: "",
         occupation: "",
@@ -18,6 +38,8 @@ export default function InquiryForm() {
         bathrooms: "",
         consent: false,
     });
+    const [success, setSuccess] = useState("");
+    const [error, setError] = useState("");
 
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -29,10 +51,65 @@ export default function InquiryForm() {
         }));
     };
 
+    function validateFormData(formData: FormData) {
+        const {
+            inquiryType,
+            occupation,
+            name,
+            email,
+            phone,
+            location,
+            propertyType,
+            maxPrice,
+            minSize,
+            bedrooms,
+            bathrooms,
+            consent
+        } = formData;
+
+        if (!inquiryType || !occupation || !name || !email || !phone || !location || !propertyType || !maxPrice || !minSize || !bedrooms || !bathrooms || !consent) {
+            return false; // Return false if any required field is empty
+        }
+
+        return true; // Return true if all required fields are filled
+    }
+
     const handleSubmit = (e: FormEvent) => {
+        setError("")
+        setSuccess("")
         e.preventDefault();
-        console.log(formData);
-        // Add your form submission logic here
+        if (validateFormData(formData) && form.current) {
+
+            try {
+                sendInquiry(form.current).then(() => {
+                    setSuccess("Inquiry sent successfully")
+
+                    setTimeout(() => {
+                        setSuccess("")
+                    }, 5000);
+
+                    setFormData({
+                        inquiryType: "",
+                        occupation: "",
+                        name: "",
+                        email: "",
+                        phone: "",
+                        location: "",
+                        propertyType: "",
+                        maxPrice: "",
+                        minSize: "",
+                        bedrooms: "",
+                        bathrooms: "",
+                        consent: false,
+                    })
+                })
+            } catch (err: any) {
+                setError(err)
+            }
+            // Here you can proceed with submitting the form data
+        } else {
+            setError("Fill out all fields")
+        }
     };
 
     return (
@@ -42,7 +119,7 @@ export default function InquiryForm() {
                 <h2 className="text-4xl font-bold">Real Estate Inquiry Form</h2>
                 <p>Submit your enquiry to Willy Investment Group</p>
             </div>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form ref={form} onSubmit={handleSubmit} className="space-y-4">
                 <div className="flex flex-col gap-2">
                     <p className="font-bold">Inquiry Type</p>
                     <select
@@ -193,6 +270,19 @@ export default function InquiryForm() {
                     </button>
                 </div>
             </form>
+
+            {/* Success and error messages */}
+            {success &&
+                <div className="fixed z-50 flex justify-center m-auto bottom-0 left-0 w-screen p-4 bg-black bg-opacity-80 rounded-md">
+                    <h1 className="text-2xl text-green-600">Inquiry Sent successfully</h1>
+                </div>
+            }
+
+            {error &&
+                <div className="fixed z-50 flex justify-center m-auto bottom-0 left-0 w-screen p-4 bg-black bg-opacity-80 rounded-md">
+                    <h1 className="text-2xl text-red-600">{error}</h1>
+                </div>
+            }
         </div>
     );
 };

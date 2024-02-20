@@ -6,7 +6,7 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="fixed z-50 flex justify-between bg-green-500 text-white font-semibold w-full shadow-lg px-8 lg:px-24 py-4 m-auto">
+    <div className="fixed z-50 flex justify-between bg-green-600 text-white font-semibold w-full shadow-lg px-8 lg:px-24 py-4 m-auto">
       <a href="/">
         <img src="/wiv.svg" className="w-16" alt="logo" />
       </a>

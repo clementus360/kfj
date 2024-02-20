@@ -5,24 +5,6 @@ import { makeOptions, modelOptions, trimLevelOptions } from "@/utils/helpers";
 import { carData } from "@/utils/types";
 import { ChangeEvent, SetStateAction, useState } from "react";
 
-enum Feature {
-    GpsNavigation = "gpsNavigation",
-    BluetoothConnectivity = "bluetoothConnectivity",
-    CruiseControl = "cruiseControl",
-    HeatedSeats = "heatedSeats",
-    Sunroof = "sunroof",
-    AlloyWheels = "alloyWheels",
-    RearviewCamera = "rearviewCamera",
-    ParkingSensors = "parkingSensors",
-    AdaptiveCruiseControl = "adaptiveCruiseControl",
-    LaneDepartureWarning = "laneDepartureWarning",
-    BlindSpotMonitoring = "blindSpotMonitoring",
-    LeatherSeats = "leatherSeats",
-    EntertainmentSystem = "entertainmentSystem",
-    AutomaticHeadlights = "automaticHeadlights",
-    RainSensingWipers = "rainSensingWipers",
-}
-
 export default function CarForm() {
     const [cover, setCover] = useState<File | null>(null);
     const [images, setImages] = useState<File[]>([]);
@@ -57,6 +39,7 @@ export default function CarForm() {
     const [error, setError] = useState("");
     const [disabled, setDisabled] = useState(false);
     const [success, setSuccess] = useState("");
+    const [loading, setLoading] = useState(false);
     const [modelOptionsForSelectedMake, setModelOptionsForSelectedMake] = useState<string[]>([]);
 
 
@@ -97,9 +80,6 @@ export default function CarForm() {
         setPrice(e.target.value);
     };
 
-    const handleDescriptionChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        setDescription(e.target.value);
-    };
 
     const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value);
@@ -132,8 +112,11 @@ export default function CarForm() {
 
     function uploadCar() {
         setError("")
+        setSuccess("")
         setDisabled(() => true)
-        
+        if (loading) return; // Prevent multiple clicks while loading
+        setLoading(true);
+
         if (
             cover &&
             make &&
@@ -201,10 +184,15 @@ export default function CarForm() {
                         automaticHeadlights: false,
                         rainSensingWipers: false,
                     });
+                    setTimeout(() => {
+                        setSuccess("")
+                    }, 5000);
                 });
             } catch (err: any) {
                 setError(err.message || "An error occurred");
                 setDisabled(false);
+            } finally {
+                setLoading(false);
             }
         } else {
             setError("Fill all fields");
@@ -294,6 +282,15 @@ export default function CarForm() {
                     ))}
                 </div>
                 <button disabled={disabled} className="bg-green-600 disabled:bg-slate-400 text-white px-4 py-2 rounded-md">Add Car</button>
+
+                {/* Loading overlay */}
+                {loading && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                        <div className="spinner-border text-white" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                )}
             </form>
 
             {/* Success and error messages */}
