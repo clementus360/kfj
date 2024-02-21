@@ -61,7 +61,7 @@ function Services() {
 export default async function Home() {
 
   return (
-    <main className="">
+    <main className="max-w-[1440px] m-auto">
       <Hero />
       <FeaturedHouses />
       <FeaturedCars />

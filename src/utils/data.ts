@@ -418,17 +418,3 @@ export async function deleteHouse(houseId: string) {
     throw error; // Optional: rethrow the error for handling at a higher level
   }
 }
-
-export async function sendInquiry(formData: HTMLFormElement) {
-  const serviceId = process.env.SERVICE_ID;
-  const templateId = process.env.TEMPLATE_ID;
-  const publicKey = process.env.PUBLIC_KEY;
-
-  console.log(serviceId, templateId, publicKey)
-
-  if (!serviceId || !templateId || !publicKey) {
-      throw new Error("One or more required environment variables are not defined.");
-  }
-
-  await emailjs.sendForm(serviceId, templateId, formData, publicKey);
-}

@@ -6,7 +6,9 @@ import Slider from "react-slick";
 function Ad({ image, title }: { image: string, title: string }) {
     return (
         <div className="m-4">
-            <img src={image} alt={title} />
+            <a href="https://wa.me/250788866144">
+                <img className="" src={image} alt={title} />
+            </a>
         </div>
     )
 }

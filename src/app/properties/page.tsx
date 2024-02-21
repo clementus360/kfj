@@ -25,7 +25,7 @@ export default async function Properties({
     }
 
     return (
-        <section className="w-screen">
+        <section className="w-screen max-w-[1440px] m-auto">
             <div className={`relative flex items-end justify-center h-[80vh] lg:h-[50vh] bg-[url("https://firebasestorage.googleapis.com/v0/b/broker-14bcb.appspot.com/o/2150799631-2.jpg?alt=media&token=9af859ed-ca9c-4dcd-9a09-2ba0e62ec113")] bg-cover`}>
                 <div className="relative z-20 flex flex-col gap-8 px-8 py-8 lg:w-3/6 ">
                     <h1 className="font-extrabold text-6xl text-center text-white">FIND THE PERFECT DREAM HOUSE</h1>

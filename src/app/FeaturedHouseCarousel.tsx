@@ -20,6 +20,8 @@ export function FeaturedHouseCarousel({ houseList }: FeaturedCarouselProps) {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 6000,
     responsive: [
       {
         breakpoint: 1024,

@@ -217,7 +217,7 @@ export default function InquiryForm() {
                         onChange={handleInputChange}
                         className="block w-full px-4 py-2 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     />
-                    <div className="flex items-center w-full gap-4 justify-between">
+                    <div className="flex flex-col lg:flex-row items-center w-full gap-4 justify-between">
                         <input
                             type="number"
                             name="minSize"

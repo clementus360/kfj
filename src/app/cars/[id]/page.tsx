@@ -50,7 +50,7 @@ export default async function CarOverlay({params}:{params: Params}) {
           </div>
           <hr />
 
-          <div className="flex justify-between px-0 gap-8 lg:gap-0 lg:px-8 flex-wrap lg:flex-nowrap">
+          <div className="grid grid-cols-2 lg:flex justify-between px-2 gap-8 lg:gap-0 lg:px-8 flex-wrap lg:flex-nowrap">
 
             <div>
               <div className="flex gap-2 items-center">
@@ -159,7 +159,7 @@ export default async function CarOverlay({params}:{params: Params}) {
           </div>
           <hr />
 
-          <div className="grid grid-cols-3 gap-4">
+          <div className="flex flex-col lg:grid lg:grid-cols-3 gap-4">
             {car?.images.map((image,key) => (
               <img key={key} src={image} alt="" />
             ))}

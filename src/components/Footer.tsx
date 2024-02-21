@@ -3,6 +3,8 @@ import Logo from "../../public/wivcolor.svg"
 
 import facebook from "../../public/icons/icons8-facebook.svg"
 import instagram from "../../public/icons/icons8-instagram.svg"
+import phone from "../../public/icons/phone.svg"
+import mail from "../../public/icons/mail.svg"
 import linkedin from "../../public/icons/icons8-linkedin.svg"
 import twitter from "../../public/icons/icons8-twitter.svg"
 import youtube from "../../public/icons/icons8-youtube.svg"
@@ -16,9 +18,11 @@ export function Footer() {
 		  <ul className="flex gap-4">
 			{/* <a href="" target="_blank"><li className="w-10 h-10 p-2 rounded-lg border-[0.1rem] border-black"><Image src={facebook} width={'50%'}></Image></li></a>
 			<a href="" target="_blank"><li className="w-10 h-10 p-2 rounded-lg border-[0.1rem] border-black"><Image src={twitter} width={'50%'}></Image></li></a>		 */}
-			{/* <a href="/" target="_blank"><li className="w-10 h-10 p-2 rounded-lg border-[0.1rem] border-black"><Image src={youtube} width={50} alt={""}></Image></li></a> */}
+			<a href="https://youtube.com/@WillyInvestmentgroup?si=-fJnKYx3dlCF5t9X" target="_blank"><li className="w-10 h-10 p-2 rounded-lg border-[0.1rem] border-black"><Image src={youtube} width={50} alt={""}></Image></li></a>
 			{/* <a href="" target="_blank"><li className="w-10 h-10 p-2 rounded-lg border-[0.1rem] border-black"><Image src={linkedin} width={'50%'}></Image></li></a>			 */}
 			<a href="https://www.instagram.com/willy_investmentgroup?igsh=dWxxcTBrb2hmbGlx" target="_blank"><li className="w-10 h-10 p-2 rounded-lg border-[0.1rem] border-black"><Image src={instagram} width={50} alt={""}></Image></li></a>
+			<a href="tel:+250784319512" target="_blank"><li className="w-10 h-10 p-2 rounded-lg border-[0.1rem] border-black"><Image src={phone} width={50} alt={""}></Image></li></a>
+			<a href="mailto:willyinvestmentgroup.rw@gmail.com" target="_blank"><li className="w-10 h-10 p-2 rounded-lg border-[0.1rem] border-black"><Image src={mail} width={50} alt={""}></Image></li></a>
 			{/* <a href="/" target="_blank"><li className="w-10 h-10 p-2 rounded-lg border-[0.1rem] border-black"><Image src={flickr} width={50} alt={""}></Image></li></a> */}
 		  </ul>
 		</div>
