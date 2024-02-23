@@ -17,7 +17,7 @@ export function FeaturedCarCarousel({ carList }: FeaturedCarouselProps) {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: carList.length >1? 3:1,
+    slidesToShow: carList.length <3? carList.length:3,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 5000,

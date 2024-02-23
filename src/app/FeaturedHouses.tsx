@@ -1,6 +1,7 @@
 import { house } from "@/utils/types";
 import { fetchHouses } from "@/utils/data";
 import { FeaturedHouseCarousel } from "./FeaturedHouseCarousel";
+import { Suspense } from "react";
 
 export async function FeaturedHouses() {
 
@@ -15,7 +16,9 @@ export async function FeaturedHouses() {
         <p className="text-sm text-slate-700 font-light w-10/12 lg:w-4/12">Discover our featured listings and find the perfect home that matches your lifestyle and aspirations.</p>
       </div>
 
-      {houses && <FeaturedHouseCarousel houseList={houses} />}
+      <Suspense fallback={<div>Loading...</div>}>
+        {houses && <FeaturedHouseCarousel houseList={houses} />}
+      </Suspense>
     </section>
   );
 }

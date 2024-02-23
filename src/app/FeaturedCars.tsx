@@ -1,6 +1,7 @@
 import { car } from "@/utils/types";
 import { fetchCars } from "@/utils/data";
 import { FeaturedCarCarousel } from "./FeaturedCarCarousel";
+import { Suspense } from "react";
 
 export async function FeaturedCars() {
 
@@ -13,7 +14,9 @@ export async function FeaturedCars() {
         <p className="text-sm text-slate-700 font-light w-10/12 lg:w-4/12">Browse through our curated collection of exquisite vehicles, crafted to elevate your driving experience and reflect your unique style and ambitions.</p>
       </div>
 
-      {cars && <FeaturedCarCarousel carList={cars} />}
+      <Suspense fallback={<div>Loading...</div>}>
+        {cars && <FeaturedCarCarousel carList={cars} />}
+      </Suspense>
     </section>
   );
 }

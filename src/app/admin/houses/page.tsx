@@ -15,7 +15,7 @@ export default async function Page() {
 
             <div className="flex justify-between gap-4 flex-wrap">
                 <Suspense fallback={<div>Loading...</div>}>
-                    {houses.map((house,key) => <HouseCard key={key} {...house} /> )}
+                    {houses?.map((house: house, key) => <HouseCard key={key} {...house} />)}
                 </Suspense>
             </div>
 

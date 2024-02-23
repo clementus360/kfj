@@ -1,6 +1,4 @@
 import House from "./House";
-
-// import { fetchHouses } from "@/utils/data";
 import { house } from "@/utils/types";
 
 import Search from "./Search";
