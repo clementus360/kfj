@@ -1,7 +1,10 @@
+"use client"
+
 import AddHouse from "./AddHouse";
 import { fetchHouses } from "@/utils/data";
 import { house } from "@/utils/types";
 import { HouseCard } from "./houseCard";
+import { Suspense } from "react";
 
 export default async function Page() {
 
@@ -13,7 +16,9 @@ export default async function Page() {
             <AddHouse />
 
             <div className="flex justify-between gap-4 flex-wrap">
-                {houseList.map((house,key) => <HouseCard key={key} {...house} /> )}
+                <Suspense fallback={<div>Loading...</div>}>
+                    {houseList.map((house,key) => <HouseCard key={key} {...house} /> )}
+                </Suspense>
             </div>
 
         </section>

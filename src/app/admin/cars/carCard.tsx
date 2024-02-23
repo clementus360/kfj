@@ -4,12 +4,15 @@ import { deleteCar } from "@/utils/data";
 import { car } from "@/utils/types";
 
 import { useState } from "react";
+import PulseLoader from "react-spinners/PulseLoader";
 
-export function CarCard(car:car) {
+export function CarCard(car: car) {
 
     const [error, setError] = useState("");
     const [disabled, setDisabled] = useState(false);
     const [success, setSuccess] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [color, setColor] = useState("#ffffff");
 
     const handleDelete = async () => {
         setError("")
@@ -17,21 +20,40 @@ export function CarCard(car:car) {
 
         const confirmDelete = window.confirm('Are you sure you want to delete this car?');
         if (confirmDelete) {
-          try {
-            await deleteCar(car.carId);
-            setSuccess('Car deleted successfully!');
-            // Optionally, you can update state or perform any other actions after deletion
-            setDisabled(false)
-          } catch (error) {
-            setError('Error deleting car')
-            setDisabled(false)
-            // Handle error
-          }
+
+            if (loading) return; // Prevent multiple clicks while loading
+            setLoading(true);
+
+            try {
+                await deleteCar(car.carId);
+                setSuccess('Car deleted successfully!');
+                // Optionally, you can update state or perform any other actions after deletion
+                setDisabled(false)
+            } catch (error) {
+                setError('Error deleting car')
+                setDisabled(false)
+                // Handle error
+            } finally {
+                setLoading(false);
+            }
         }
-      };
+    };
 
     return (
         <div className="flex flex-col lg:flex-row gap-4 w-full items-center justify-between shadow-lg rounded-md py-8 lg:py-0 lg:pr-8 overflow-hidden">
+
+            {/* Loading overlay */}
+            {loading && (
+                <div className="fixed inset-0 w-screen h-screen flex items-center justify-center bg-black bg-opacity-50">
+                    <PulseLoader
+                        color={color}
+                        loading={loading}
+                        size={150}
+                        aria-label="Loading Spinner"
+                        data-testid="loader"
+                    />
+                </div>
+            )}
 
             <a href={`/properties/${car.carId}`}><img src={car.cover} alt="test" className="w-60 bg-black" /></a>
 

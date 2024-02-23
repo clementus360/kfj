@@ -1,3 +1,5 @@
+"use client"
+
 import { car } from "@/utils/types";
 import { fetchCars } from "@/utils/data";
 import { FeaturedCarCarousel } from "./FeaturedCarCarousel";

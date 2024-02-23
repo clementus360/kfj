@@ -2,36 +2,57 @@
 
 import { deleteAd } from "@/utils/data";
 
-import {ad} from "@/utils/types";
+import { ad } from "@/utils/types";
 
 import { useState } from "react";
+import PulseLoader from "react-spinners/PulseLoader";
 
 export function AdCard(ad: ad) {
 
     const [error, setError] = useState("");
     const [disabled, setDisabled] = useState(false);
     const [success, setSuccess] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [color, setColor] = useState("#ffffff");
 
     const handleDelete = async () => {
         setError("");
         setDisabled(true);
-    
+
         const confirmDelete = window.confirm("Are you sure you want to delete this ad?");
         if (confirmDelete) {
-          try {
-            await deleteAd(ad.adId);
-            setSuccess("ad deleted successfully!");
-            setDisabled(false);
-          } catch (error) {
-            setError("Error deleting ad");
-            setDisabled(false);
-          }
+            if (loading) return; // Prevent multiple clicks while loading
+            setLoading(true);
+
+            try {
+                await deleteAd(ad.adId);
+                setSuccess("ad deleted successfully!");
+                setDisabled(false);
+            } catch (error) {
+                setError("Error deleting ad");
+                setDisabled(false);
+            } finally {
+                setLoading(false)
+            }
         }
-      };
+    };
 
     return (
         <div className="flex flex-col lg:flex-row gap-4 w-full items-center justify-between shadow-lg rounded-md py-8 lg:py-0 lg:pr-8 overflow-hidden">
 
+            {/* Loading overlay */}
+            {loading && (
+                <div className="fixed inset-0 w-screen h-screen flex items-center justify-center bg-black bg-opacity-50">
+                    <PulseLoader
+                        color={color}
+                        loading={loading}
+                        size={150}
+                        aria-label="Loading Spinner"
+                        data-testid="loader"
+                    />
+                </div>
+            )}
+            
             <a href={`/properties/${ad.adId}`}><img src={ad.ad} alt="test" className="w-60 bg-black" /></a>
 
             <div className="flex flex-col gap-2">

@@ -16,6 +16,7 @@ export default async function Properties({
 }) {
 
     const query = searchParams?.query || '';
+    
     let houseList: Array<house> = await fetchHouses()
 
     if (query) {

@@ -3,6 +3,7 @@
 import { addAd } from "@/utils/data";
 import { adsData } from "@/utils/types";
 import { ChangeEvent, SetStateAction, useState } from "react";
+import PulseLoader from "react-spinners/PulseLoader";
 
 export default function AdForm() {
 
@@ -12,6 +13,7 @@ export default function AdForm() {
     const [disabled, setDisabled] = useState(false);
     const [success, setSuccess] = useState("");
     const [loading, setLoading] = useState(false);
+    let [color, setColor] = useState("#ffffff");
 
     const handleAd = (e: ChangeEvent<HTMLInputElement>) => {
         setAd(e.target.files ? e.target.files[0] : null);
@@ -23,7 +25,10 @@ export default function AdForm() {
 
     function uploadAd() {
         setError("")
-        setDisabled(() => true)
+        setSuccess("")
+
+        if (loading) return; // Prevent multiple clicks while loading
+        setLoading(true);
 
         if (
             ad &&
@@ -35,7 +40,8 @@ export default function AdForm() {
                 date_added: Date.now(),
             };
 
-            console.log(adInfo);
+            setDisabled(true)
+            setLoading(true)
 
             try {
 
@@ -51,16 +57,31 @@ export default function AdForm() {
                 setError(err.message || "An error occurred");
             } finally {
                 setLoading(false);
+                setDisabled(false);
             }
         } else {
             setError("Fill all fields");
+            setDisabled(false);
         }
 
-        setDisabled(false);
     }
 
     return (
         <form action={uploadAd} className="flex flex-col gap-8 bg-white px-8 py-8 rounded-md">
+            {/* Loading overlay */ }
+
+            {loading && (
+                <div className="fixed z-50 inset-0 w-screen h-screen flex items-center justify-center bg-black bg-opacity-50">
+                    <PulseLoader
+                        color={color}
+                        loading={loading}
+                        size={150}
+                        aria-label="Loading Spinner"
+                        data-testid="loader"
+                    />
+                </div>
+            )}
+
             <h1 className="text-center text-4xl font-bold">ADD AD</h1>
             <div>
                 <p>Add Cover</p>
@@ -71,19 +92,10 @@ export default function AdForm() {
 
             <button disabled={disabled} className="bg-green-600 disabled:bg-slate-400 text-white px-4 py-2 rounded-md">Add Ad</button>
 
-            {/* Loading overlay */}
-            {loading && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                    <div className="spinner-border text-white" role="status">
-                        <span className="visually-hidden">Loading...</span>
-                    </div>
-                </div>
-            )}
-
             {/* Success and error messages */}
             {success &&
                 <div className="fixed z-50 flex justify-center m-auto bottom-0 left-0 w-screen p-4 bg-black bg-opacity-80 rounded-md">
-                    <h1 className="text-2xl text-green-600">Ad added successfully</h1>
+                    <h1 className="text-2xl text-green-600">Car uploaded successfully</h1>
                 </div>
             }
 
@@ -92,6 +104,7 @@ export default function AdForm() {
                     <h1 className="text-2xl text-red-600">{error}</h1>
                 </div>
             }
+
         </form>
     )
 }

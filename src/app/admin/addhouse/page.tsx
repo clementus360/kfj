@@ -3,6 +3,7 @@
 import { addHouse } from "@/utils/data";
 import { houseData } from "@/utils/types";
 import { ChangeEvent, SetStateAction, useState } from "react";
+import PulseLoader from "react-spinners/PulseLoader";
 
 export default function HouseForm() {
     const [cover, setCover] = useState<File | null>(null);
@@ -36,6 +37,7 @@ export default function HouseForm() {
     const [disabled, setDisabled] = useState(false);
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState("");
+    let [color, setColor] = useState("#ffffff");
 
     const handleCover = (e: ChangeEvent<HTMLInputElement>) => {
         setCover(e.target.files ? e.target.files[0] : null);
@@ -103,7 +105,10 @@ export default function HouseForm() {
 
     function uploadHouse() {
         setError("")
-        setDisabled(() => true)
+        setSuccess("")
+
+        if (loading) return; // Prevent multiple clicks while loading
+
 
         if (
             cover &&
@@ -121,6 +126,7 @@ export default function HouseForm() {
             price &&
             description
         ) {
+            
             const house: houseData = {
                 name: name,
                 email: email,
@@ -143,11 +149,12 @@ export default function HouseForm() {
                 date_added: Date.now(),
             };
 
-            console.log(house);
+            setLoading(true);
+            setDisabled(true)
 
             try {
 
-                console.log(house)
+                console.log(loading)
                 addHouse(house).then(() => {
                     setCover(null);
                     setName("");
@@ -183,16 +190,33 @@ export default function HouseForm() {
                 setError(err.message || "An error occurred");
             } finally {
                 setLoading(false);
+                setDisabled(false);
             }
         } else {
             setError("Fill all fields");
+            setLoading(false);
+            setDisabled(false);
         }
 
-        setDisabled(false);
     }
 
     return (
         <div className="w-full">
+
+            {/* Loading overlay */ }
+
+            {loading && (
+                <div className="fixed z-50 inset-0 w-screen h-screen flex items-center justify-center bg-black bg-opacity-50">
+                    <PulseLoader
+                        color={color}
+                        loading={loading}
+                        size={150}
+                        aria-label="Loading Spinner"
+                        data-testid="loader"
+                    />
+                </div>
+            )}
+
             <form action={uploadHouse} className="flex flex-col gap-8 bg-white px-8 py-8 rounded-md">
                 {/* Other input fields */}
 
@@ -247,16 +271,8 @@ export default function HouseForm() {
                         </div>
                     ))}
                 </div>
-                <button disabled={disabled} className="bg-blue-800 disabled:bg-slate-400 text-white px-4 py-2 rounded-md">Add House</button>
+                <button disabled={disabled} className="bg-blue-800 disabled:bg-slate-400 text-white px-4 py-2 rounded-md z-50 cursor-pointer">Add House</button>
 
-                {/* Loading overlay */}
-                {loading && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                        <div className="spinner-border text-white" role="status">
-                            <span className="visually-hidden">Loading...</span>
-                        </div>
-                    </div>
-                )}
             </form>
 
             {/* Success and error messages */}

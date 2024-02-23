@@ -4,6 +4,7 @@ import { addCar } from "@/utils/data";
 import { makeOptions, modelOptions, trimLevelOptions } from "@/utils/helpers";
 import { carData } from "@/utils/types";
 import { ChangeEvent, SetStateAction, useState } from "react";
+import PulseLoader from "react-spinners/PulseLoader";
 
 export default function CarForm() {
     const [cover, setCover] = useState<File | null>(null);
@@ -41,6 +42,7 @@ export default function CarForm() {
     const [success, setSuccess] = useState("");
     const [loading, setLoading] = useState(false);
     const [modelOptionsForSelectedMake, setModelOptionsForSelectedMake] = useState<string[]>([]);
+    let [color, setColor] = useState("#ffffff");
 
 
     const handleCover = (e: ChangeEvent<HTMLInputElement>) => {
@@ -113,9 +115,8 @@ export default function CarForm() {
     function uploadCar() {
         setError("")
         setSuccess("")
-        setDisabled(() => true)
+
         if (loading) return; // Prevent multiple clicks while loading
-        setLoading(true);
 
         if (
             cover &&
@@ -151,6 +152,9 @@ export default function CarForm() {
                 images: images,
                 date_added: Date.now(),
             };
+
+            setLoading(true);
+            setDisabled(true)
 
             try {
                 addCar(carData).then(() => {
@@ -193,18 +197,32 @@ export default function CarForm() {
                 setDisabled(false);
             } finally {
                 setLoading(false);
+                setDisabled(false);
             }
         } else {
             setError("Fill all fields");
             setDisabled(false);
         }
 
-        setDisabled(false);
     }
 
 
     return (
         <div className="w-full">
+            {/* Loading overlay */ }
+
+            {loading && (
+                <div className="fixed z-50 inset-0 w-screen h-screen flex items-center justify-center bg-black bg-opacity-50">
+                    <PulseLoader
+                        color={color}
+                        loading={loading}
+                        size={150}
+                        aria-label="Loading Spinner"
+                        data-testid="loader"
+                    />
+                </div>
+            )}
+
             <form action={uploadCar} className="flex flex-col gap-8 bg-white px-8 py-8 rounded-md">
                 <h1 className="text-center text-4xl font-bold">ADD CAR</h1>
                 <div>
@@ -283,14 +301,6 @@ export default function CarForm() {
                 </div>
                 <button disabled={disabled} className="bg-green-600 disabled:bg-slate-400 text-white px-4 py-2 rounded-md">Add Car</button>
 
-                {/* Loading overlay */}
-                {loading && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                        <div className="spinner-border text-white" role="status">
-                            <span className="visually-hidden">Loading...</span>
-                        </div>
-                    </div>
-                )}
             </form>
 
             {/* Success and error messages */}

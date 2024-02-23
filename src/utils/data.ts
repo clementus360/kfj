@@ -7,8 +7,6 @@ import uniqid from 'uniqid';
 import { app } from "@/utils/firebase";
 import { addCommasToPrice, formatCurrency, formatTimestamp } from "./helpers";
 
-import emailjs from "@emailjs/browser"
-
 export async function addHouse({
   cover,
   images,

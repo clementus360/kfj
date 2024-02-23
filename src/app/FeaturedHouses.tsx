@@ -1,3 +1,5 @@
+"use client"
+
 import { house } from "@/utils/types";
 import { fetchHouses } from "@/utils/data";
 import { FeaturedHouseCarousel } from "./FeaturedHouseCarousel";
