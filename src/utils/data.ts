@@ -1,7 +1,7 @@
 import { ad, adsData, car, carData, house, houseData } from "./types";
 
 import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
-import { getFirestore, setDoc, query, where, collection, getDocs, doc, QueryDocumentSnapshot, DocumentData, deleteDoc, getDoc } from "firebase/firestore";
+import { getFirestore, setDoc, query, where, collection, getDocs, doc, QueryDocumentSnapshot, DocumentData, deleteDoc, getDoc, onSnapshot, Unsubscribe } from "firebase/firestore";
 
 import uniqid from 'uniqid';
 import { app } from "@/utils/firebase";
@@ -69,35 +69,43 @@ export async function addHouse({
   })
 }
 
-export async function fetchHouses(): Promise<house[]> {
+export async function fetchHouses(): Promise<{ houses: house[]; unsubscribe: Unsubscribe }> {
   const db = getFirestore(app);
-  const q = query(collection(db, "houses"));
-  const querySnapshot = await getDocs(q);
+  const q = collection(db, "houses");
 
-  const houses: house[] = querySnapshot.docs.map((doc: QueryDocumentSnapshot<DocumentData>) => {
-    const data = doc.data();
-    return {
-      houseId: doc.id,
-      name: data.name,
-      images: data.images,
-      email: data.email,
-      propertyType: data.propertyType,
-      propertyStatus: data.propertyStatus,
-      bedrooms: data.bedrooms,
-      bathrooms: data.bathrooms,
-      sqFt: data.sqFt,
-      features: data.features,
-      address: data.address,
-      price: formatCurrency(data.price),
-      cover: data.cover,
-      description: data.description,
-      date_added: formatTimestamp(data.date_added),
-      yearBuilt: data.yearBuilt,
-      phone: data.phone,
-    };
+  return new Promise((resolve, reject) => {
+    // Subscribe to real-time updates
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const houses: house[] = [];
+      querySnapshot.forEach((doc: QueryDocumentSnapshot<DocumentData>) => {
+        const data = doc.data();
+        houses.push({
+          houseId: doc.id,
+          name: data.name,
+          images: data.images,
+          email: data.email,
+          propertyType: data.propertyType,
+          propertyStatus: data.propertyStatus,
+          bedrooms: data.bedrooms,
+          bathrooms: data.bathrooms,
+          sqFt: data.sqFt,
+          features: data.features,
+          address: data.address,
+          price: formatCurrency(data.price),
+          cover: data.cover,
+          description: data.description,
+          date_added: formatTimestamp(data.date_added),
+          yearBuilt: data.yearBuilt,
+          phone: data.phone,
+        });
+      });
+      // Resolve the promise with houses array and unsubscribe function
+      resolve({ houses, unsubscribe });
+    }, (error) => {
+      // Reject the promise if there's an error
+      reject(error);
+    });
   });
-
-  return houses;
 }
 
 export async function fetchSingleHouse(id: string): Promise<house | null> {
@@ -192,33 +200,41 @@ export async function addCar({
   })
 }
 
-export async function fetchCars(): Promise<car[]> {
+export async function fetchCars(): Promise<{ cars: car[]; unsubscribe: Unsubscribe }> {
   const db = getFirestore(app);
   const q = query(collection(db, "cars"));
-  const querySnapshot = await getDocs(q);
 
-  const cars: car[] = querySnapshot.docs.map((doc: QueryDocumentSnapshot<DocumentData>) => {
-    const data = doc.data();
-    return {
-      carId: doc.id,
-      cover: data.cover,
-      make: data.make,
-      model: data.model,
-      yearBuilt: data.yearBuilt,
-      trimLevel: data.trimLevel,
-      mileage: data.mileage,
-      price: formatCurrency(data.price),
-      description: data.description,
-      email: data.email,
-      phone: data.phone,
-      address: data.address,
-      features: data.features,
-      images: data.images,
-      date_added: formatTimestamp(data.date_added)
-    };
+  return new Promise((resolve, reject) => {
+    // Subscribe to real-time updates
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const cars: car[] = [];
+      querySnapshot.forEach((doc: QueryDocumentSnapshot<DocumentData>) => {
+        const data = doc.data();
+        cars.push({
+          carId: doc.id,
+          cover: data.cover,
+          make: data.make,
+          model: data.model,
+          yearBuilt: data.yearBuilt,
+          trimLevel: data.trimLevel,
+          mileage: data.mileage,
+          price: formatCurrency(data.price),
+          description: data.description,
+          email: data.email,
+          phone: data.phone,
+          address: data.address,
+          features: data.features,
+          images: data.images,
+          date_added: formatTimestamp(data.date_added),
+        });
+      });
+      // Resolve the promise with cars array and unsubscribe function
+      resolve({ cars, unsubscribe });
+    }, (error) => {
+      // Reject the promise if there's an error
+      reject(error);
+    });
   });
-
-  return cars;
 }
 
 export async function fetchSingleCar(id: string): Promise<car | null> {

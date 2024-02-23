@@ -17,10 +17,10 @@ export default async function Properties({
 
     const query = searchParams?.query || '';
     
-    let houseList: Array<house> = await fetchHouses()
+    let { houses, unsubscribe } = await fetchHouses()
 
     if (query) {
-        houseList = houseList.filter((house) =>
+        houses = houses.filter((house) =>
             house.address.area.toLowerCase().includes(query.toLowerCase())
         );
     }
@@ -41,7 +41,7 @@ export default async function Properties({
             <div className="px-8 lg:px-32 py-16 w-full">
                 <div className="flex flex-wrap justify-start gap-8 w-full">
                     <Suspense fallback={<div>Loading...</div>}>
-                        {houseList?.map((house: house, key) => <House key={key} {...house} />)}
+                        {houses?.map((house: house, key) => <House key={key} {...house} />)}
                     </Suspense>
                 </div>
             </div>

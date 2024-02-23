@@ -15,10 +15,10 @@ export default async function Properties({
 }) {
 
     const query = searchParams?.query || '';
-    let carList: Array<car> = await fetchCars()
+    let { cars, unsubscribe }= await fetchCars()
 
     if (query) {
-        carList = carList.filter((car) =>
+        cars = cars.filter((car) =>
             car.address.area.toLowerCase().includes(query.toLowerCase())
         );
     }
@@ -38,7 +38,7 @@ export default async function Properties({
             <div className="px-8 lg:px-32 py-16 w-full">
                 <div className="flex flex-wrap justify-start gap-8 w-full">
                     <Suspense fallback={<div>Loading...</div>}>
-                        {carList?.map((car: car, key) => <CarCard key={key} {...car} />)}
+                        {cars?.map((car: car, key) => <CarCard key={key} {...car} />)}
                     </Suspense>
                 </div>
             </div>

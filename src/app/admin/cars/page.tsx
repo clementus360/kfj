@@ -7,7 +7,7 @@ import { CarCard } from "./carCard";
 
 export default async function Page() {
 
-    let carList: Array<car> = await fetchCars();
+    const { cars, unsubscribe } = await fetchCars();
 
     return (
         <section className="flex flex-col gap-8 px-8 lg:px-32 bg-slate-100 rounded-md py-8">
@@ -15,7 +15,7 @@ export default async function Page() {
             <AddCar />
 
             <div className="flex justify-between gap-4 flex-wrap">
-                {carList.map((car,key) => <CarCard key={key} {...car} /> )}
+                {cars.map((car,key) => <CarCard key={key} {...car} /> )}
             </div>
 
         </section>
