@@ -1,11 +1,36 @@
+"use client"
+
 import { car } from "@/utils/types";
 import { fetchCars } from "@/utils/data";
 import { FeaturedCarCarousel } from "./FeaturedCarCarousel";
-import { Suspense } from "react";
+import { Suspense, useState, useEffect } from "react";
+import { Unsubscribe } from "firebase/firestore";
 
-export async function FeaturedCars() {
+export function FeaturedCars() {
 
-  const { cars, unsubscribe } = await fetchCars();
+  const [cars, setCars] = useState<car[]>([]);
+
+  useEffect(() => {
+    let unsubscribe: Unsubscribe | undefined;
+  
+    const fetchData = async () => {
+      try {
+        const result = await fetchCars();
+        setCars(result.cars);
+        unsubscribe = result.unsubscribe;
+      } catch (error) {
+        console.error('Error fetching houses:', error);
+      }
+    };
+  
+    fetchData();
+  
+    return () => {
+      if (unsubscribe) {
+        unsubscribe();
+      }
+    };
+  }, []);
 
   return (
     <section className="flex flex-col gap-8 px-8 py-16 lg:px-32">
