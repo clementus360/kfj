@@ -1,3 +1,5 @@
+"use client"
+
 import AddCar from "./AddCar";
 import { fetchCars } from "@/utils/data";
 import { CarCard } from "./carCard";
