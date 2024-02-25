@@ -129,7 +129,7 @@ export const modelOptions = {
     "Nissan": ["Altima", "Maxima", "Murano", "Rogue", "Sentra", "Titan"],
     "Ram": ["1500", "2500", "3500"],
     "Subaru": ["Ascent", "Forester", "Outback"],
-    "Toyota": ["Camry", "Corolla", "Highlander", "RAV4", "Sienna", "Tundra"],
+    "Toyota": ["Camry", "Corolla", "Highlander", "RAV4", "Sienna", "Tundra", "Dyna", "Van"],
     "Volkswagen": ["Atlas", "Golf", "Jetta", "Tiguan"],
     "Volvo": ["S60", "S90", "XC40", "XC60", "XC90"],
     // Add more options as needed
