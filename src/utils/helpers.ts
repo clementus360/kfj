@@ -133,7 +133,7 @@ export const modelOptions = {
     "Toyota": ["4Runner", "86", "Alphard", "Avalon", "C-HR", "Camry", "Corolla", "Corolla Cross", "Corolla iM (formerly known as Scion iM)", "Dyna", "GR Supra", "HiAce", "Highlander", "Land Cruiser", "Mirai", "Previa (also known as Estima)", "Prius", "Prius Prime", "Proace Verso", "RAV4", "Sequoia", "Sienna", "Sienna", "Tacoma", "Tundra", "Vanza", "Yaris", "Yaris Hatchback"],
     "Volkswagen": ["Atlas", "Golf", "Jetta", "Tiguan"],
     "Volvo": ["S60", "S90", "XC40", "XC60", "XC90"],
-    "Daihatsu": ["Altis", "Ayla", "Copen", "Gran Max", "Hijet", "Mira", "Move", "Rocky", "Sigra", "Sirion (also known as Boon or Toyota Passo in some markets)", "Taft", "Tanto", "Terios (also known as Be‣go or Toyota Rush in some markets)", "Thor", "Xenia"]
+    "Daihatsu": ["Altis", "Ayla", "Copen", "Delta", "Gran Max", "Hijet", "Mira", "Move", "Rocky", "Sigra", "Sirion (also known as Boon or Toyota Passo in some markets)", "Taft", "Tanto", "Terios (also known as Be‣go or Toyota Rush in some markets)", "Thor", "Xenia"]
     // Add more options as needed
 };
 
