@@ -129,7 +129,7 @@ export const modelOptions = {
     "Nissan": ["Altima", "Maxima", "Murano", "Rogue", "Sentra", "Titan"],
     "Ram": ["1500", "2500", "3500"],
     "Subaru": ["Ascent", "Forester", "Outback"],
-    "Toyota": ["Camry", "Corolla", "Highlander", "RAV4", "Sienna", "Tundra", "Dyna", "Van"],
+    "Toyota": ["4Runner", "86", "Avalon", "C-HR", "Camry", "Corolla", "Corolla Cross", "Corolla iM (formerly known as Scion iM)", "GR Supra", "Highlander", "Land Cruiser", "Mirai", "Prius", "Prius Prime", "RAV4", "Sequoia", "Sienna", "Tacoma", "Tundra", "Venza", "Yaris", "Yaris Hatchback", "Sienna", "HiAce", "Alphard", "Previa (also known as Estima)", "Proace Verso", "Dyna", "Van"],
     "Volkswagen": ["Atlas", "Golf", "Jetta", "Tiguan"],
     "Volvo": ["S60", "S90", "XC40", "XC60", "XC90"],
     // Add more options as needed
