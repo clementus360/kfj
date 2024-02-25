@@ -300,32 +300,30 @@ export async function addAd(adData: adsData) {
   }
 }
 
-export async function fetchAds(): Promise<ad[]> {
-  try {
-    const db = getFirestore();
-    
-    // Query the "ads" collection
-    const q = query(collection(db, "ads"));
-    
-    // Get the documents in the collection
-    const querySnapshot = await getDocs(q);
+export async function fetchAds(): Promise<{ ads: ad[]; unsubscribe: Unsubscribe }> {
+  const db = getFirestore();
+  const q = query(collection(db, "ads"));
 
-    // Map each document to the ad object
-    const ads: ad[] = querySnapshot.docs.map((doc: QueryDocumentSnapshot<DocumentData>) => {
-      const data = doc.data();
-      return {
-        adId: doc.id,
-        ad: data.image,
-        description: data.description,
-        date_added: data.date_added
-      };
+  return new Promise((resolve, reject) => {
+    // Subscribe to real-time updates
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const ads: ad[] = [];
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        ads.push({
+          adId: doc.id,
+          ad: data.image,
+          description: data.description,
+          date_added: data.date_added
+        });
+      });
+      // Resolve the promise with ads array and unsubscribe function
+      resolve({ ads, unsubscribe });
+    }, (error) => {
+      // Reject the promise if there's an error
+      reject(error);
     });
-
-    return ads;
-  } catch (error) {
-    console.error("Error fetching ads:", error);
-    throw error;
-  }
+  });
 }
 
 

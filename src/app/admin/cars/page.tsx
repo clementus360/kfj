@@ -7,7 +7,7 @@ import { Suspense, useEffect, useState } from "react";
 import { Unsubscribe } from "firebase/firestore";
 import { car } from "@/utils/types";
 
-export default async function Page() {
+export default function Page() {
 
     const [cars, setCars] = useState<car[]>([]);
 
