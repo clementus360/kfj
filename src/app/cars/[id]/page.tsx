@@ -37,8 +37,8 @@ export default async function CarOverlay({params}:{params: Params}) {
         </div>
       </div>
 
-      <div className="relative w-full object-cover flex items-center h-[60vw] lg:h-[30vw] overflow-hidden">
-        <img src={car?.cover} alt="car" className="w-full top-0 left-0 bg-black" />
+      <div className="relative w-full flex items-center justify-center h-[60vw] lg:h-[40vw] overflow-hidden">
+        <img src={car?.cover} alt="car" className="top-0 left-0 bg-black" />
       </div>
 
       <div className="flex flex-col gap-8 items-center">

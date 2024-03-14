@@ -41,8 +41,8 @@ export default async function HouseOverlay({ params }: { params: Params }) {
         </div>
       </div>
 
-      <div className="relative w-full object-cover h-[60vw] lg:h-[30vw] overflow-hidden">
-        <img src={house?.cover} alt="house" className="absolute top-0 left-0 w-full bg-black" />
+      <div className="relative w-full flex items-center justify-center h-[60vw] lg:h-[40vw] overflow-hidden">
+        <img src={house?.cover} alt="house" className="top-0 left-0 bg-black" />
       </div>
 
       <div className="flex flex-col gap-8 items-center">
