@@ -11,19 +11,16 @@ export default function Car({
   trimLevel,
   mileage,
   price,
-  description,
-  email,
-  phone,
   address,
-  features,
-  images,
-  date_added 
+  date_added
 }: car) {
 
   return (
     <div className="flex flex-col gap-2 w-full lg:w-min lg:min-w-[360px] bg-slate-200 p-4 rounded-md shadow-lg">
 
-      <img src={cover} alt="house name" className="bg-black w-full rounded-md aspect-video" />
+      <div className="bg-black w-full overflow-hidden rounded-md aspect-video flex items-center justify-center">
+        <img src={cover} alt="house name" className="" />
+      </div>
 
       <div className="flex gap-2 items-center">
         <p className="text-lg font-bold text-slate-600">{make} - {model}</p>

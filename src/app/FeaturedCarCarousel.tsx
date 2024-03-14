@@ -4,7 +4,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { car, house } from "@/utils/types";
+import { car } from "@/utils/types";
 import Car from "./cars/Car";
 
 interface FeaturedCarouselProps {
@@ -17,7 +17,7 @@ export function FeaturedCarCarousel({ carList }: FeaturedCarouselProps) {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: carList.length <3? carList.length:3,
+    slidesToShow: carList.length < 3 ? carList.length : 3,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 5000,
@@ -42,13 +42,19 @@ export function FeaturedCarCarousel({ carList }: FeaturedCarouselProps) {
     ]
   };
 
+  if (carList.length < 2 && carList[0]) {
+    return (
+      <Car {...carList[0]} />
+    )
+  }
+
   return (
-      <Slider {...settings}>
-        {carList.map((car, key) => (
-          <div key={key}>
-            <Car {...car} />
-          </div>
-        ))}
-      </Slider>
+    <Slider {...settings}>
+      {carList.map((car, key) => (
+        <div key={key}>
+          <Car {...car} />
+        </div>
+      ))}
+    </Slider>
   );
 }

@@ -32,8 +32,6 @@ export function FeaturedHouses() {
     };
   }, []);
 
-  // let { houses, unsubscribe } = await fetchHouses()
-
   return (
     <section className="flex flex-col gap-8 px-8 py-16 lg:px-32">
       <div>
