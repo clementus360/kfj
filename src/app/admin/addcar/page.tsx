@@ -191,12 +191,12 @@ export default function CarForm() {
                     setTimeout(() => {
                         setSuccess("")
                     }, 5000);
+
+                    setLoading(false);
+                    setDisabled(false);
                 });
             } catch (err: any) {
                 setError(err.message || "An error occurred");
-                setDisabled(false);
-            } finally {
-                setLoading(false);
                 setDisabled(false);
             }
         } else {
@@ -216,7 +216,7 @@ export default function CarForm() {
                     <PulseLoader
                         color={color}
                         loading={loading}
-                        size={150}
+                        size={50}
                         aria-label="Loading Spinner"
                         data-testid="loader"
                     />
